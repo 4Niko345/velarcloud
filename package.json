@@ -1,0 +1,45 @@
+{
+  "name": "velarcloud",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run generate:types && next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
+    "migrate:create": "npm run payload migrate:create",
+    "migrate": "npm run payload migrate",
+    "migrate:status": "npm run payload migrate:status",
+    "generate:types": "npm run payload generate:types",
+    "generate:importmap": "npm run payload generate:importmap"
+  },
+  "dependencies": {
+    "@payloadcms/db-postgres": "3.88.0",
+    "@payloadcms/next": "3.88.0",
+    "@payloadcms/richtext-lexical": "3.88.0",
+    "@payloadcms/ui": "3.88.0",
+    "cross-env": "7.0.3",
+    "graphql": "16.9.0",
+    "next": "16.2.7",
+    "payload": "3.88.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "sharp": "0.33.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.7",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
