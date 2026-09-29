@@ -1,19 +1,52 @@
 @import "tailwindcss";
 
+/* Velar Cloud brand: deep navy + cloud blue (from velarcloud.fi / .com). */
 @theme {
   --color-background: #ffffff;
-  --color-foreground: #0f172a;
-  --color-muted: #64748b;
+  --color-foreground: #0b1b33;
+  --color-muted: #52627a;
   --color-border: #e2e8f0;
-  --color-brand: #1e3a8a;
-  --color-brand-soft: #3b5bdb;
-  --color-accent: #facc15;
-  --color-accent-soft: #fde047;
+  --color-surface: #f4f7fa;
 
-  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --color-navy-950: #061429;
+  --color-navy-900: #0a2240;
+  --color-navy-800: #12325c;
+  /* #2876e7 on the old sites is 4.3:1 against white; this keeps white button text ≥ 4.5:1. */
+  --color-brand: #1f66d1;
+  --color-brand-strong: #184f9f;
+  --color-sky: #8ec5ff;
 }
 
-body {
-  background: var(--color-background);
-  color: var(--color-foreground);
+/* Fonts come from next/font variables set on <html> in app/(frontend)/[lang]/layout.tsx. */
+@theme inline {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-poppins), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Keep anchored sections clear of the sticky header. */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  /* Long Finnish compounds must wrap on narrow screens instead of overflowing. */
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
 }

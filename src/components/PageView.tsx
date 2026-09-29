@@ -1,13 +1,23 @@
 import Image from 'next/image'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { Locale } from '@/i18n/config'
+import { getDictionary } from '@/i18n/dictionaries'
+import { getSiteSettings } from '@/lib/settings'
 import type { Page } from '@/payload/payload-types'
+import { RenderSections } from './sections/RenderSections'
 
-export function PageView({ page }: { page: Page }) {
+/** A page built from sections, or a simple title + rich text page (e.g. privacy policy). */
+export async function PageView({ page, locale }: { page: Page; locale: Locale }) {
+  if (page.layout?.length) {
+    const settings = await getSiteSettings(locale)
+    return <RenderSections sections={page.layout} ctx={{ locale, settings, dict: getDictionary(locale) }} />
+  }
+
   const hero = typeof page.heroImage === 'object' ? page.heroImage : null
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:py-16">
-      <h1 className="text-3xl font-bold tracking-tight sm:text-5xl">{page.title}</h1>
+      <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-5xl">{page.title}</h1>
       {page.description && <p className="mt-4 text-lg text-muted">{page.description}</p>}
       {hero?.url && (
         <Image

@@ -1,0 +1,342 @@
+// Starting content for the front page and site settings, in both languages.
+// Facts, prices and links are taken from the previous velarcloud.fi / .com sites.
+// `t(fi, en)` marks a localized value; everything else is shared.
+
+export type Localized = { fi: string; en: string }
+const t = (fi: string, en: string): Localized => ({ fi, en })
+
+const trial = (label: Localized, appearance: 'primary' | 'secondary' = 'primary') => ({
+  label,
+  kind: 'trial',
+  appearance,
+})
+const booking = (label: Localized, appearance: 'primary' | 'secondary' = 'secondary') => ({
+  label,
+  kind: 'booking',
+  appearance,
+})
+
+export const homePage = {
+  slug: 'home',
+  title: t(
+    'Velar Cloud – Tehokas asiakkuudenhallintajärjestelmä (CRM)',
+    'Velar Cloud – The All-in-One CRM for Business Growth',
+  ),
+  description: t(
+    'Velar Cloud kokoaa asiakkuudenhallinnan, markkinoinnin automaation, verkkosivut ja asiakasviestinnän yhteen alustaan. Kokeile maksutta 14 päivää.',
+    'Velar Cloud brings CRM, marketing automation, websites and client communication together in one platform. Start your 14-day free trial.',
+  ),
+  layout: [
+    {
+      blockType: 'hero',
+      eyebrow: t('Kaikki yhdessä alustassa', 'All-in-one platform'),
+      heading: t(
+        'Asiakkuudet, markkinointi ja automaatio samassa paikassa',
+        'Your CRM, marketing and automation in one place',
+      ),
+      text: t(
+        'Velar Cloud kokoaa CRM:n, markkinoinnin automaation, verkkosivut ja asiakasviestinnän yhteen selkeään alustaan. Vähemmän erillisiä ohjelmia, enemmän aikaa kasvuun.',
+        'Velar Cloud brings CRM, marketing automation, websites and client communication together in one simple platform. Fewer tools to juggle, more time to grow.',
+      ),
+      links: [
+        trial(t('Kokeile maksutta 14 päivää', 'Start your 14-day free trial')),
+        booking(t('Varaa ilmainen puhelu', 'Book a free call')),
+      ],
+      highlights: [
+        { text: t('14 päivän ilmainen kokeilu', '14-day free trial') },
+        { text: t('Nopea ja vaivaton käyttöönotto', 'Quick, easy setup') },
+        { text: t('Kaikki työkalut yhdessä paikassa', 'Every tool in one place') },
+      ],
+    },
+    {
+      blockType: 'logoCloud',
+      heading: t('Toimii alan parhaiden työkalujen kanssa', 'Integrates with the best in the industry'),
+      items: [
+        'Google',
+        'Facebook',
+        'Instagram',
+        'Stripe',
+        'PayPal',
+        'Shopify',
+        'WordPress',
+        'Zoom',
+        'Slack',
+        'Twilio',
+        'QuickBooks',
+        'OpenAI',
+      ].map((name) => ({ name })),
+    },
+    {
+      blockType: 'features',
+      anchor: 'features',
+      eyebrow: t('Ominaisuudet', 'Features'),
+      heading: t('Kaikki tarvittava yrityksesi kasvuun', 'Everything you need to run your business'),
+      text: t(
+        'Korvaa erilliset ohjelmat yhdellä alustalla, jossa myynti, markkinointi ja viestintä toimivat yhdessä.',
+        'Replace scattered tools with one platform where sales, marketing and communication work together.',
+      ),
+      items: [
+        {
+          icon: 'crm',
+          title: t('Myynti ja asiakkuudenhallinta', 'CRM and sales management'),
+          text: t(
+            'Seuraa liidejä, asiakkaita ja myyntiputkea yhdestä näkymästä.',
+            'Track leads, customers and sales pipelines in one view.',
+          ),
+        },
+        {
+          icon: 'website',
+          title: t('Verkkosivut ja myyntikanavat', 'Website and funnel builder'),
+          text: t(
+            'Suunnittele ja julkaise ammattimaiset verkkosivut ja myyntisuppilot vaivattomasti.',
+            'Design and launch professional websites and sales funnels with ease.',
+          ),
+        },
+        {
+          icon: 'automation',
+          title: t('Markkinointi ja automaatio', 'Marketing and lead automation'),
+          text: t(
+            'Automatisoi kampanjat ja liidien hoivaus, niin viestit lähtevät oikeille ihmisille oikeaan aikaan.',
+            'Automate campaigns and lead nurturing so the right message reaches the right people at the right time.',
+          ),
+        },
+        {
+          icon: 'messages',
+          title: t('Kaikki viestintä yhdessä paikassa', 'All-in-one communication hub'),
+          text: t(
+            'Tekstiviestit, sähköpostit ja sosiaalisen median viestit samassa postilaatikossa.',
+            'SMS, email and social media messages in a single inbox.',
+          ),
+        },
+        {
+          icon: 'social',
+          title: t('Sosiaalisen median ajastaminen', 'Social media scheduling'),
+          text: t(
+            'Suunnittele, ajasta ja julkaise julkaisut kaikkiin kanaviisi kerralla.',
+            'Plan, schedule and publish posts across all your channels at once.',
+          ),
+        },
+        {
+          icon: 'payments',
+          title: t('Ajanvaraukset ja maksut', 'Calendar and payments'),
+          text: t(
+            'Anna asiakkaiden varata aika itse ja hoida maksut automaattisesti.',
+            'Let clients book their own appointments and process payments automatically.',
+          ),
+        },
+      ],
+    },
+    {
+      blockType: 'benefits',
+      anchor: 'benefits',
+      eyebrow: t('Miksi Velar Cloud', 'Why Velar Cloud'),
+      heading: t('Säästä aikaa tärkeämpiin asioihin', 'Save your time for what matters'),
+      text: t(
+        'Kun työkalut toimivat yhdessä, arki kevenee ja kasvulle jää enemmän aikaa.',
+        'When your tools work together, the day-to-day gets lighter and you have more time to grow.',
+      ),
+      items: [
+        {
+          title: t('Yksi alusta', 'One platform'),
+          text: t(
+            'Hallinnoi asiakkuuksia, markkinointia ja automaatiota vaivattomasti yhdessä paikassa.',
+            'Manage customers, marketing and automation effortlessly in one place.',
+          ),
+        },
+        {
+          title: t('Automaatio hoitaa rutiinit', 'Automation handles the routine'),
+          text: t(
+            'Anna automaation hoitaa toistuvat tehtävät ja keskity liiketoiminnan kasvuun.',
+            'Automate the tasks you would rather not do and focus on growing your business.',
+          ),
+        },
+        {
+          title: t('Säästöä ohjelmakuluissa', 'Lower software costs'),
+          text: t(
+            'Yksi tilaus korvaa useita erillisiä ohjelmia, mikä säästää sekä aikaa että rahaa.',
+            'One subscription replaces several separate tools, saving both time and money.',
+          ),
+        },
+      ],
+    },
+    {
+      blockType: 'pricing',
+      anchor: 'pricing',
+      eyebrow: t('Hinnasto', 'Pricing'),
+      heading: t('Valitse yrityksellesi sopiva paketti', 'Choose the right plan for your business'),
+      text: t(
+        'Kaikki paketit alkavat 14 päivän maksuttomalla kokeilulla.',
+        'Every plan starts with a 14-day free trial.',
+      ),
+      plans: [
+        {
+          name: t('Perus', 'Basic'),
+          price: '$97',
+          description: t(
+            'Perustyökalut asiakkuuksien ja myynnin hallintaan.',
+            'The core tools for managing customers and sales.',
+          ),
+          featuresHeading: t('Sisältää:', 'Includes:'),
+          features: [
+            t('Helppo ja nopea käyttöönotto', 'Effortless setup and integration'),
+            t('Asiakkuudenhallinta ja myyntimahdollisuuksien seuranta', 'CRM for lead and customer management'),
+            t('Verkkosivujen luominen vaivattomasti', 'Build websites with ease'),
+            t('Työkalut verkkokurssien rakentamiseen', 'Course builder'),
+            t('Automaatiotyökalut työnkulkujen tehostamiseen', 'Automation workflow builder'),
+            t('Kaikki asiakasviestintä yhdessä paikassa', 'All-in-one client communication'),
+            t('Tiimien ja tehtävien hallinta', 'Task management'),
+            t('Kalenterin integrointi ja ajanvaraukset', 'Integrated calendar and bookings'),
+            t('Sähköpostituki', 'Email support'),
+          ].map((text) => ({ text })),
+          link: trial(t('Valitse Perus', 'Choose Basic'), 'secondary'),
+        },
+        {
+          name: t('Ammattilainen', 'Pro'),
+          price: '$297',
+          highlighted: true,
+          description: t(
+            'Kasvavalle yritykselle, joka haluaa automatisoida myynnin ja markkinoinnin.',
+            'For growing businesses that want to automate sales and marketing.',
+          ),
+          featuresHeading: t('Kaikki Perus-paketista, lisäksi:', 'Everything in Basic, plus:'),
+          features: [
+            t('Sosiaalisen median kanavien hallinta ja ajastaminen', 'Social media integration and scheduling'),
+            t('Rajattomasti käyttäjiä ja yhteystietoja', 'Unlimited team seats and contacts'),
+            t('Tekoälyä hyödyntävät automaatiot', 'AI-powered workflows and automation'),
+            t('Automaattinen liidien vastaanotto ja hallinta', 'Automated lead intake and management'),
+            t('Kehittyneet myynnin ja markkinoinnin automaatiot', 'Advanced sales and marketing automation'),
+            t('Verkkosivujen integrointi ja ylläpito', 'Website integration and hosting'),
+            t('WhatsApp-integraatio', 'WhatsApp integration'),
+            t('Hakukoneoptimoinnin (SEO) työkalut', 'SEO tools'),
+            t('Jäsenyys- ja yhteisötyökalut', 'Membership and community tools'),
+            t('Chat- ja puhelintuki', 'Chat and phone support'),
+          ].map((text) => ({ text })),
+          link: trial(t('Valitse Ammattilainen', 'Choose Pro')),
+        },
+        {
+          name: t('Eliitti', 'Agency'),
+          price: '$497',
+          description: t(
+            'Toimistoille ja yrityksille, jotka haluavat kaiken irti automaatiosta.',
+            'For agencies and businesses that want the most out of automation.',
+          ),
+          featuresHeading: t('Kaikki Ammattilainen-paketista, lisäksi:', 'Everything in Pro, plus:'),
+          features: [
+            t('Laajennetut automaatiot markkinointiin', 'Advanced agency automations'),
+            t('Skaalautuvat myynti- ja markkinointikampanjat', 'Scalable sales and marketing drip campaigns'),
+            t('Liidien jakelu tehokkaisiin myyntisuppiloihin', 'Lead distribution for high-converting funnels'),
+            t('Mukautettavat lomakkeet ja asiakaskyselyt', 'Custom qualifying forms and surveys'),
+            t('Räätälöidyt kalenteriratkaisut', 'Dedicated calendar setup'),
+            t('Velarin asiantuntijat ja ensiluokkainen tuki', 'Access to Velar Cloud experts and premium support'),
+            t('Palvelun brändäys omalla ilmeellä (white label)', 'Reseller licenses for white-labeling'),
+          ].map((text) => ({ text })),
+          link: trial(t('Valitse Eliitti', 'Choose Agency'), 'secondary'),
+        },
+      ],
+    },
+    {
+      blockType: 'faq',
+      anchor: 'faq',
+      eyebrow: t('UKK', 'FAQ'),
+      heading: t('Usein kysytyt kysymykset', 'Frequently asked questions'),
+      text: t(
+        'Etkö löytänyt vastausta? Varaa ilmainen puhelu tai lähetä meille sähköpostia.',
+        "Didn't find your answer? Book a free call or send us an email.",
+      ),
+      items: [
+        {
+          question: t('Miten Velar Cloud voi auttaa yritystäni?', 'How does Velar Cloud help my business?'),
+          answer: t(
+            'Velar Cloud tarjoaa kaiken, mitä tarvitset yrityksesi hallintaan ja kasvuun: asiakkuudenhallinnan, markkinoinnin automaation, myyntikanavat ja paljon muuta. Yksi selkeä alusta säästää aikaa ja nopeuttaa tuloksia.',
+            'Velar Cloud gives you everything you need to manage and grow your business: CRM, marketing automation, sales funnels and more, in one easy-to-use platform. It saves time and helps you get results faster.',
+          ),
+        },
+        {
+          question: t('Millaisille yrityksille Velar Cloud sopii?', 'What kind of businesses can use Velar Cloud?'),
+          answer: t(
+            'Kaiken kokoisille yrityksille, niin aloittaville kuin vakiintuneillekin: pienyrityksille, yrittäjille, toimistoille ja verkkokaupoille. Jos haluat tehostaa myyntiä ja markkinointia, Velar Cloud on hyvä valinta.',
+            "Any business that wants to simplify its operations, automate tasks and grow, whether you're a small business, freelancer, agency or online seller.",
+          ),
+        },
+        {
+          question: t('Sopiiko Velar Cloud myyntimahdollisuuksien hallintaan?', 'Is Velar Cloud good for managing leads?'),
+          answer: t(
+            'Kyllä. Sisäänrakennettu asiakkuudenhallinta auttaa seuraamaan liidejä ja myyntimahdollisuuksia, hallitsemaan asiakassuhteita ja olemaan yhteydessä oikeaan aikaan.',
+            'Yes. The built-in CRM helps you track leads and opportunities, manage contacts and follow up at the right time, so you always know where each lead stands.',
+          ),
+        },
+        {
+          question: t('Voiko Velar Cloud automatisoida markkinointini?', 'Can Velar Cloud automate my marketing?'),
+          answer: t(
+            'Kyllä. Voit automatisoida sähköpostikampanjat, seurantaviestit ja työnkulut. Määritä ne kerran, ja Velar Cloud hoitaa loput.',
+            'Yes. Automate email campaigns, follow-ups and workflows. Set them up once and let Velar Cloud do the rest.',
+          ),
+        },
+        {
+          question: t('Miksi Velar Cloud on hyvä valinta?', 'What makes Velar Cloud different?'),
+          answer: t(
+            'Velar Cloud kokoaa tärkeimmät työkalut yhteen: CRM:n, markkinoinnin, myyntisuppilot ja automaation. Et tarvitse useita erillisiä ohjelmia, mikä säästää aikaa ja rahaa.',
+            'Instead of juggling multiple tools, Velar Cloud brings CRM, marketing, funnels and automation together in one platform that grows with you.',
+          ),
+        },
+        {
+          question: t('Kuinka nopeasti pääsen alkuun?', 'How quickly can I get started?'),
+          answer: t(
+            'Käyttöönotto on nopeaa ja vaivatonta. Tilauksen jälkeen saat työkalut nopeasti käyttöösi ja voit keskittyä liiketoimintasi kasvattamiseen.',
+            'Setup is quick and easy. Once you subscribe, you get access to your tools right away and can focus on growing your business.',
+          ),
+        },
+      ],
+    },
+    {
+      blockType: 'cta',
+      anchor: 'contact',
+      heading: t('Valmis kokeilemaan?', 'Ready to get started?'),
+      text: t(
+        'Aloita 14 päivän maksuton kokeilu tai varaa ilmainen puhelu, niin käydään yhdessä läpi, miten Velar Cloud sopii yrityksellesi.',
+        "Start your 14-day free trial, or book a free call and we'll walk through how Velar Cloud fits your business.",
+      ),
+      links: [
+        trial(t('Kokeile maksutta 14 päivää', 'Start your free trial')),
+        booking(t('Varaa ilmainen puhelu', 'Book a free call')),
+      ],
+      showEmail: true,
+    },
+  ],
+}
+
+export const siteSettings = {
+  nav: [
+    { label: t('Ominaisuudet', 'Features'), href: '#features' },
+    { label: t('Hinnasto', 'Pricing'), href: '#pricing' },
+    { label: t('UKK', 'FAQ'), href: '#faq' },
+    { label: t('Yhteystiedot', 'Contact'), href: '#contact' },
+  ],
+  loginLabel: t('Kirjaudu', 'Log in'),
+  loginUrl: 'https://velar.cloud/',
+  headerCta: trial(t('Kokeile maksutta', 'Free trial')),
+  // The old sites' signup and booking funnels (GoHighLevel). Move them to a
+  // subdomain before this site takes over velarcloud.fi / .com, then update here.
+  trialUrl: t('https://velarcloud.fi/valitse-palvelu-ratkaisu', 'https://velarcloud.com/choose-your-plan-page'),
+  bookingUrl: t('https://velarcloud.fi/varaus-kalenteri', 'https://velarcloud.com/booking-calendar'),
+  contactEmail: 'support@velarcloud.com',
+  social: [
+    { platform: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61571491043564' },
+    { platform: 'Instagram', url: 'https://www.instagram.com/velarcloud/' },
+    { platform: 'TikTok', url: 'https://www.tiktok.com/@velarcloud' },
+  ],
+  footerText: t(
+    'Tehokas ja automatisoitu asiakkuudenhallinta yrityksesi kasvuun.',
+    'The all-in-one CRM for business growth.',
+  ),
+  legalLinks: [
+    {
+      label: t('Tietosuojaseloste', 'Privacy policy'),
+      url: t('https://velarcloud.fi/tietosuojaseloste', 'https://velarcloud.com/privacypolicy'),
+    },
+    {
+      label: t('Käyttöehdot', 'Terms and conditions'),
+      url: t('https://velarcloud.fi/kayttoehdot', 'https://velarcloud.com/terms'),
+    },
+  ],
+}

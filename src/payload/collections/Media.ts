@@ -20,5 +20,5 @@ export const Media: CollectionConfig = {
       { name: 'hero', width: 1920 },
     ],
   },
-  fields: [{ name: 'alt', type: 'text', required: true }],
+  fields: [{ name: 'alt', type: 'text', required: true, localized: true }],
 }

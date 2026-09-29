@@ -8,7 +8,9 @@ import { fileURLToPath } from 'node:url'
 import { Users } from './src/payload/collections/Users'
 import { Media } from './src/payload/collections/Media'
 import { Pages } from './src/payload/collections/Pages'
+import { SiteSettings } from './src/payload/globals/SiteSettings'
 import { migrations } from './src/payload/migrations'
+import { defaultLocale, localeNames, locales } from './src/i18n/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -26,6 +28,14 @@ export default buildConfig({
   },
 
   collections: [Pages, Media, Users],
+  globals: [SiteSettings],
+
+  // Content languages. Untranslated fields fall back to Finnish.
+  localization: {
+    locales: locales.map((code) => ({ code, label: localeNames[code].name })),
+    defaultLocale,
+    fallback: true,
+  },
 
   editor: lexicalEditor(),
 
