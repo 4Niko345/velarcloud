@@ -14,10 +14,11 @@ const base =
   'inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2'
 
 const styles = {
-  primary: 'bg-brand text-white shadow-sm hover:bg-brand-strong focus-visible:outline-brand',
+  // Gold with near-black text: 8:1 contrast.
+  primary: 'bg-gold text-ink-950 shadow-sm hover:bg-gold-strong',
   secondaryLight:
-    'border border-border bg-white text-foreground hover:border-brand hover:text-brand focus-visible:outline-brand',
-  secondaryDark: 'border border-white/25 text-white hover:bg-white/10 focus-visible:outline-white',
+    'border border-foreground/15 bg-white text-foreground hover:border-gold-ink hover:text-gold-ink',
+  secondaryDark: 'border border-gold/45 text-white hover:border-gold hover:bg-gold/10',
 }
 
 export function ButtonLink({
@@ -28,7 +29,8 @@ export function ButtonLink({
   className = '',
 }: ButtonLinkProps) {
   const style =
-    appearance === 'primary' ? styles.primary : onDark ? styles.secondaryDark : styles.secondaryLight
+    (appearance === 'primary' ? styles.primary : onDark ? styles.secondaryDark : styles.secondaryLight) +
+    (onDark ? ' focus-visible:outline-gold' : ' focus-visible:outline-gold-ink')
   const classes = `${base} ${style} ${className}`
 
   if (href.startsWith('/') && !isExternal(href)) {

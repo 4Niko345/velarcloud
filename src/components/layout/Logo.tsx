@@ -19,7 +19,7 @@ export function Logo({ logo }: { logo?: Media | number | null }) {
   return (
     <span className="flex flex-col items-center leading-none">
       <span className="font-display text-lg font-semibold tracking-[0.32em]">VELAR</span>
-      <span className="mt-1 text-[0.55rem] font-medium tracking-[0.55em] text-sky">CLOUD</span>
+      <span className="mt-1 text-[0.55rem] font-medium tracking-[0.55em] text-gold">CLOUD</span>
     </span>
   )
 }

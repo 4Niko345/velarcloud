@@ -15,9 +15,9 @@ export function Features({ block }: { block: FeaturesBlock }) {
             return (
               <li
                 key={item.id ?? item.title}
-                className="rounded-2xl border border-border bg-white p-6 shadow-sm transition motion-safe:hover:-translate-y-0.5 hover:shadow-md"
+                className="rounded-2xl border border-border bg-white p-6 shadow-sm transition hover:border-gold/50 hover:shadow-md motion-safe:hover:-translate-y-0.5"
               >
-                <span className="flex size-11 items-center justify-center rounded-xl bg-brand/10 text-brand">
+                <span className="flex size-11 items-center justify-center rounded-xl bg-gold/10 text-gold-ink ring-1 ring-gold/25">
                   <Icon className="size-5" aria-hidden />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-semibold leading-snug">{item.title}</h3>

@@ -33,7 +33,7 @@ export default async function HomePage({ params }: Args) {
       <p className="mt-6 text-lg text-muted">{dict.placeholder}</p>
       <Link
         href="/admin"
-        className="mt-10 inline-flex min-h-11 items-center rounded-full bg-brand px-6 text-sm font-semibold text-white hover:bg-brand-strong"
+        className="mt-10 inline-flex min-h-11 items-center rounded-full bg-gold px-6 text-sm font-semibold text-ink-950 hover:bg-gold-strong"
       >
         {dict.openAdmin}
       </Link>

@@ -18,10 +18,10 @@ export function Faq({ block }: { block: FaqBlock }) {
         <div className="divide-y divide-border rounded-2xl border border-border bg-white">
           {(block.items ?? []).map((item) => (
             <details key={item.id ?? item.question} className="group px-5 sm:px-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold hover:text-gold-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-ink [&::-webkit-details-marker]:hidden">
                 {item.question}
                 <ChevronDown
-                  className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180"
+                  className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180 group-open:text-gold-ink"
                   aria-hidden
                 />
               </summary>

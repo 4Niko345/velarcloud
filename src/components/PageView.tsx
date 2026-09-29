@@ -30,7 +30,7 @@ export async function PageView({ page, locale }: { page: Page; locale: Locale })
         />
       )}
       {page.content && (
-        <div className="mt-8 space-y-4 leading-relaxed [&_a]:text-brand [&_a]:underline [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:text-xl [&_h3]:font-semibold [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6">
+        <div className="mt-8 space-y-4 leading-relaxed [&_a]:text-gold-ink [&_a]:underline [&_h2]:mt-8 [&_h2]:text-2xl [&_h2]:font-semibold [&_h3]:text-xl [&_h3]:font-semibold [&_ol]:list-decimal [&_ol]:pl-6 [&_ul]:list-disc [&_ul]:pl-6">
           <RichText data={page.content} />
         </div>
       )}

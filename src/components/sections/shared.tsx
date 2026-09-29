@@ -22,8 +22,11 @@ export function SectionHeader({ id, eyebrow, heading, text, align = 'center', on
     <div className={align === 'center' ? 'mx-auto max-w-2xl text-center' : 'max-w-xl'}>
       {eyebrow && (
         <p
-          className={`text-sm font-semibold uppercase tracking-[0.16em] ${onDark ? 'text-sky' : 'text-brand'}`}
+          className={`flex items-center gap-3 text-sm font-semibold uppercase tracking-[0.16em] ${
+            align === 'center' ? 'justify-center' : ''
+          } ${onDark ? 'text-gold' : 'text-gold-ink'}`}
         >
+          <span aria-hidden className="h-px w-8 bg-current opacity-60" />
           {eyebrow}
         </p>
       )}

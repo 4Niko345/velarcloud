@@ -34,7 +34,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
         aria-controls={panelId}
         aria-label={open ? labels.close : labels.open}
         onClick={() => setOpen((value) => !value)}
-        className="flex size-11 items-center justify-center rounded-full text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+        className="flex size-11 items-center justify-center rounded-full text-white hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
       >
         {open ? <X className="size-6" aria-hidden /> : <Menu className="size-6" aria-hidden />}
       </button>
@@ -42,7 +42,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
       <div
         id={panelId}
         hidden={!open}
-        className="absolute inset-x-0 top-full border-b border-white/10 bg-navy-950 px-4 pb-6 pt-2 shadow-2xl sm:px-6"
+        className="absolute inset-x-0 top-full border-b border-gold/15 bg-ink-950 px-4 pb-6 pt-2 shadow-2xl sm:px-6"
       >
         <nav aria-label={labels.nav}>
           <ul className="divide-y divide-white/10">
@@ -51,7 +51,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
                 <a
                   href={item.href}
                   onClick={close}
-                  className="block py-3.5 text-base font-medium text-white/90 hover:text-white"
+                  className="block py-3.5 text-base font-medium text-white/90 hover:text-gold-soft"
                 >
                   {item.label}
                 </a>
@@ -59,7 +59,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
             ))}
             {login && (
               <li>
-                <a href={login.href} className="block py-3.5 text-base font-medium text-white/90 hover:text-white">
+                <a href={login.href} className="block py-3.5 text-base font-medium text-white/90 hover:text-gold-soft">
                   {login.label}
                 </a>
               </li>
@@ -70,7 +70,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
           <a
             href={cta.href}
             onClick={close}
-            className="mt-4 flex min-h-11 items-center justify-center rounded-full bg-brand px-6 text-sm font-semibold text-white hover:bg-brand-strong sm:hidden"
+            className="mt-4 flex min-h-11 items-center justify-center rounded-full bg-gold px-6 text-sm font-semibold text-ink-950 hover:bg-gold-strong sm:hidden"
           >
             {cta.label}
           </a>

@@ -21,12 +21,12 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
   const cta = ctaHref ? { label: settings.headerCta.label, href: ctaHref } : null
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-950/90 text-white backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-gold/15 bg-ink-950/90 text-white backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
         <Link
           href={localePath(locale)}
           aria-label="Velar Cloud"
-          className="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+          className="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
         >
           <Logo logo={settings.logo} />
         </Link>
@@ -38,7 +38,7 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:bg-white/5 hover:text-white focus-visible:outline-2 focus-visible:outline-white"
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-gold"
                   >
                     {item.label}
                   </a>
@@ -53,7 +53,7 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
           {login && (
             <a
               href={login.href}
-              className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/80 hover:text-white focus-visible:outline-2 focus-visible:outline-white lg:block"
+              className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/80 hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-gold lg:block"
             >
               {login.label}
             </a>
@@ -61,7 +61,9 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
           {cta && (
             // Phones get this button inside the menu instead.
             <div className="hidden sm:block">
-              <ButtonLink href={cta.href}>{cta.label}</ButtonLink>
+              <ButtonLink href={cta.href} onDark>
+                {cta.label}
+              </ButtonLink>
             </div>
           )}
           <MobileMenu

@@ -21,14 +21,14 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
                 key={plan.id ?? plan.name}
                 className={`flex flex-col rounded-3xl p-6 sm:p-8 ${
                   dark
-                    ? 'bg-navy-900 text-white shadow-2xl shadow-navy-900/30 ring-2 ring-brand lg:py-12'
+                    ? 'bg-ink-950 text-white shadow-2xl shadow-ink-950/30 ring-1 ring-gold/60 lg:py-12'
                     : 'border border-border bg-white'
                 }`}
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h3 className="font-display text-xl font-semibold">{plan.name}</h3>
                   {plan.badge && (
-                    <span className="rounded-full bg-brand px-3 py-1 text-xs font-semibold text-white">
+                    <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink-950">
                       {plan.badge}
                     </span>
                   )}
@@ -64,7 +64,7 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
                       {plan.features.map((feature) => (
                         <li key={feature.id ?? feature.text} className="flex gap-3">
                           <Check
-                            className={`mt-0.5 size-4 shrink-0 ${dark ? 'text-sky' : 'text-brand'}`}
+                            className={`mt-0.5 size-4 shrink-0 ${dark ? 'text-gold' : 'text-gold-ink'}`}
                             aria-hidden
                           />
                           <span className={dark ? 'text-white/85' : 'text-foreground/80'}>{feature.text}</span>

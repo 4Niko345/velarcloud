@@ -8,9 +8,9 @@ export function Benefits({ block }: { block: BenefitsBlock }) {
     <section
       id={block.anchor || undefined}
       aria-labelledby={headingId}
-      className="relative isolate overflow-hidden bg-navy-900 py-20 text-white sm:py-24"
+      className="relative isolate overflow-hidden bg-ink-900 py-20 text-white sm:py-24"
     >
-      <div aria-hidden className="absolute -right-32 top-0 -z-10 size-96 rounded-full bg-brand/25 blur-3xl" />
+      <div aria-hidden className="absolute -right-32 top-0 -z-10 size-96 rounded-full bg-gold/10 blur-3xl" />
       <div className={`${container} grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-center lg:gap-16`}>
         <SectionHeader
           id={headingId}
@@ -24,9 +24,9 @@ export function Benefits({ block }: { block: BenefitsBlock }) {
           {(block.items ?? []).map((item, index) => (
             <li
               key={item.id ?? item.title}
-              className="flex gap-5 rounded-2xl border border-white/10 bg-white/[0.04] p-6"
+              className="flex gap-5 rounded-2xl border border-gold/15 bg-white/[0.03] p-6"
             >
-              <span aria-hidden className="font-display text-2xl font-semibold text-sky">
+              <span aria-hidden className="font-display text-2xl font-semibold text-gold">
                 {String(index + 1).padStart(2, '0')}
               </span>
               <div>
