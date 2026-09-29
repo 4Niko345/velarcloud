@@ -43,6 +43,17 @@ export function Hero({ block, ctx }: { block: HeroBlock; ctx: SectionContext }) 
             </div>
           )}
 
+          {block.trustItems && block.trustItems.length > 0 && (
+            <ul className="mt-4 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-xs tracking-wide text-white/65 sm:justify-start sm:text-[0.8125rem]">
+              {block.trustItems.map((item, index) => (
+                <li key={item.id ?? item.text} className="flex items-center gap-2.5">
+                  {index > 0 && <span aria-hidden className="size-1 rounded-full bg-gold/80" />}
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          )}
+
           {block.highlights && block.highlights.length > 0 && (
             <ul className="mt-8 flex flex-col gap-2.5 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-6">
               {block.highlights.map((item) => (

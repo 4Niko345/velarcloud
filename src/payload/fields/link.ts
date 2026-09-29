@@ -1,14 +1,21 @@
 import type { ArrayField, Field } from 'payload'
 
+type LinkFieldOptions = {
+  /** Show the Primary/Secondary choice (buttons). Off for plain text links. */
+  appearance?: boolean
+  /** Require a label. Off where the link is optional (e.g. the announcement bar). */
+  required?: boolean
+}
+
 /**
  * A call-to-action link. "Free trial" and "Book a call" resolve to the URLs in
  * Site settings, so a new signup or booking address is changed in one place.
  */
-export const linkFields: Field[] = [
+export const linkFields = ({ appearance = true, required = true }: LinkFieldOptions = {}): Field[] => [
   {
     type: 'row',
     fields: [
-      { name: 'label', type: 'text', required: true, localized: true },
+      { name: 'label', type: 'text', required, localized: true },
       {
         name: 'kind',
         type: 'select',
@@ -20,16 +27,20 @@ export const linkFields: Field[] = [
           { label: 'Custom URL or #section', value: 'custom' },
         ],
       },
-      {
-        name: 'appearance',
-        type: 'select',
-        required: true,
-        defaultValue: 'primary',
-        options: [
-          { label: 'Primary', value: 'primary' },
-          { label: 'Secondary', value: 'secondary' },
-        ],
-      },
+      ...(appearance
+        ? [
+            {
+              name: 'appearance',
+              type: 'select',
+              required: true,
+              defaultValue: 'primary',
+              options: [
+                { label: 'Primary', value: 'primary' },
+                { label: 'Secondary', value: 'secondary' },
+              ],
+            } satisfies Field,
+          ]
+        : []),
     ],
   },
   {
@@ -47,5 +58,5 @@ export const linksField = (maxRows = 2): ArrayField => ({
   name: 'links',
   type: 'array',
   maxRows,
-  fields: linkFields,
+  fields: linkFields(),
 })

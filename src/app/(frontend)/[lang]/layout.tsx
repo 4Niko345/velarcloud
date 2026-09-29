@@ -3,6 +3,7 @@ import { Inter, Poppins } from 'next/font/google'
 import { defaultLocale, hasLocale } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { getSiteSettings } from '@/lib/settings'
+import { AnnouncementBar } from '@/components/layout/AnnouncementBar'
 import { SiteFooter } from '@/components/layout/SiteFooter'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import '../../globals.css'
@@ -43,6 +44,7 @@ export default async function FrontendLayout({ children, params }: LayoutArgs) {
         >
           {dict.skipToContent}
         </a>
+        <AnnouncementBar locale={locale} settings={settings} />
         <SiteHeader locale={locale} settings={settings} dict={dict} />
         <main id="main" className="flex-1">
           {children}

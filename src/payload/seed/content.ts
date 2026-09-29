@@ -42,6 +42,12 @@ export const homePage = {
         trial(t('Kokeile maksutta 14 päivää', 'Start your 14-day free trial')),
         booking(t('Varaa ilmainen puhelu', 'Book a free call')),
       ],
+      // Supplied by Velar Cloud; confirm against the actual trial terms before publishing.
+      trustItems: [
+        { text: t('Ei sitoutumista', 'No commitment') },
+        { text: t('Ei luottokorttia', 'No credit card required') },
+        { text: t('Peru milloin vain', 'Cancel anytime') },
+      ],
       highlights: [
         { text: t('14 päivän ilmainen kokeilu', '14-day free trial') },
         { text: t('Nopea ja vaivaton käyttöönotto', 'Quick, easy setup') },
@@ -306,6 +312,12 @@ export const homePage = {
 }
 
 export const siteSettings = {
+  announcement: {
+    enabled: true,
+    text: t('Kokeile Velar Cloudia maksutta 14 päivää', 'Try Velar Cloud free for 14 days'),
+    label: t('Aloita kokeilu', 'Start your trial'),
+    kind: 'trial',
+  },
   nav: [
     { label: t('Ominaisuudet', 'Features'), href: '#features' },
     { label: t('Hinnasto', 'Pricing'), href: '#pricing' },

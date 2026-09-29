@@ -1,9 +1,11 @@
 /**
  * Fills an empty database with the front page and site settings in Finnish
- * and English. Skips anything that already exists unless run with --force.
+ * and English. Skips anything that already exists unless run with "force".
  *
  *   npm run seed
- *   npm run seed -- --force   # overwrite the home page and site settings
+ *   npm run seed -- force   # overwrite the home page and site settings
+ *
+ * (A positional word, not --force: `payload run` passes only positional arguments on.)
  */
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import config from '../../../payload.config'
@@ -48,7 +50,7 @@ function withIds(value: unknown, saved: unknown, isRow = false): unknown {
   return value
 }
 
-const force = process.argv.includes('--force')
+const force = process.argv.includes('force')
 const otherLocales = locales.filter((code) => code !== defaultLocale)
 const payload = await getPayload({ config })
 
@@ -62,7 +64,7 @@ const existing = await payload.find({
 })
 
 if (existing.docs[0] && !force) {
-  payload.logger.info('Home page exists, skipping (use --force to overwrite).')
+  payload.logger.info('Home page exists, skipping (run `npm run seed -- force` to overwrite).')
 } else {
   const data = { ...(pick(homePage, defaultLocale) as Data), _status: 'published' }
   let saved = existing.docs[0]
@@ -96,7 +98,7 @@ if (existing.docs[0] && !force) {
 const settings = await payload.findGlobal({ slug: 'site-settings', locale: defaultLocale, depth: 0 })
 
 if (settings.trialUrl && !force) {
-  payload.logger.info('Site settings exist, skipping (use --force to overwrite).')
+  payload.logger.info('Site settings exist, skipping (run `npm run seed -- force` to overwrite).')
 } else {
   let saved = await payload.updateGlobal({
     slug: 'site-settings',

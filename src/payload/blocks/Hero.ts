@@ -13,6 +13,16 @@ export const HeroBlock: Block = {
     { name: 'text', type: 'textarea', localized: true },
     linksField(),
     {
+      name: 'trustItems',
+      label: 'Trust line',
+      type: 'array',
+      maxRows: 4,
+      admin: {
+        description: 'Small reassurance right under the buttons, e.g. "Ei sitoutumista", "Peru milloin vain".',
+      },
+      fields: [{ name: 'text', type: 'text', required: true, localized: true }],
+    },
+    {
       name: 'highlights',
       type: 'array',
       maxRows: 4,

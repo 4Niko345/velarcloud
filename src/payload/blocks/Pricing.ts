@@ -63,7 +63,7 @@ export const PricingBlock: Block = {
           type: 'array',
           fields: [{ name: 'text', type: 'text', required: true, localized: true }],
         },
-        { name: 'link', type: 'group', fields: linkFields },
+        { name: 'link', type: 'group', fields: linkFields() },
       ],
     },
     {

@@ -14,6 +14,27 @@ export const SiteSettings: GlobalConfig = {
       type: 'tabs',
       tabs: [
         {
+          label: 'Announcement bar',
+          fields: [
+            {
+              name: 'announcement',
+              type: 'group',
+              admin: { description: 'Thin bar above the header on every page, e.g. for the free trial.' },
+              fields: [
+                { name: 'enabled', label: 'Show the bar', type: 'checkbox', defaultValue: false },
+                {
+                  name: 'text',
+                  type: 'text',
+                  localized: true,
+                  validate: (value: null | string | undefined, { siblingData }: { siblingData: { enabled?: boolean } }) =>
+                    !siblingData?.enabled || Boolean(value) || 'Required while the bar is shown.',
+                },
+                ...linkFields({ appearance: false, required: false }),
+              ],
+            },
+          ],
+        },
+        {
           label: 'Header',
           fields: [
             {
@@ -51,7 +72,7 @@ export const SiteSettings: GlobalConfig = {
                 { name: 'loginUrl', type: 'text', admin: { description: 'Customer login, e.g. the app URL.' } },
               ],
             },
-            { name: 'headerCta', label: 'Header button', type: 'group', fields: linkFields },
+            { name: 'headerCta', label: 'Header button', type: 'group', fields: linkFields() },
           ],
         },
         {

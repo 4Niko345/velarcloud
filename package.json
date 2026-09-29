@@ -13,7 +13,7 @@
     "migrate:create": "npm run payload migrate:create",
     "migrate": "npm run payload migrate",
     "migrate:status": "npm run payload migrate:status",
-    "seed": "npm run payload run src/payload/seed/index.ts",
+    "seed": "npm run payload -- run src/payload/seed/index.ts",
     "generate:types": "npm run payload generate:types",
     "generate:importmap": "npm run payload generate:importmap"
   },

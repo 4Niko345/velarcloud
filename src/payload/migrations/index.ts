@@ -1,5 +1,6 @@
 import * as migration_20260928_134421_initial from './20260928_134421_initial';
 import * as migration_20260929_144306_localization_and_sections from './20260929_144306_localization_and_sections';
+import * as migration_20260929_153505_trial_announcement_and_trust_line from './20260929_153505_trial_announcement_and_trust_line';
 
 export const migrations = [
   {
@@ -10,6 +11,11 @@ export const migrations = [
   {
     up: migration_20260929_144306_localization_and_sections.up,
     down: migration_20260929_144306_localization_and_sections.down,
-    name: '20260929_144306_localization_and_sections'
+    name: '20260929_144306_localization_and_sections',
+  },
+  {
+    up: migration_20260929_153505_trial_announcement_and_trust_line.up,
+    down: migration_20260929_153505_trial_announcement_and_trust_line.down,
+    name: '20260929_153505_trial_announcement_and_trust_line'
   },
 ];
