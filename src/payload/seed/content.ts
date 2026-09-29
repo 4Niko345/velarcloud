@@ -49,9 +49,9 @@ export const homePage = {
         { text: t('Peru milloin vain', 'Cancel anytime') },
       ],
       highlights: [
-        { text: t('14 päivän ilmainen kokeilu', '14-day free trial') },
-        { text: t('Nopea ja vaivaton käyttöönotto', 'Quick, easy setup') },
-        { text: t('Kaikki työkalut yhdessä paikassa', 'Every tool in one place') },
+        { icon: 'gift', text: t('14 päivän ilmainen kokeilu', '14-day free trial') },
+        { icon: 'zap', text: t('Nopea ja vaivaton käyttöönotto', 'Quick, easy setup') },
+        { icon: 'layers', text: t('Kaikki työkalut yhdessä paikassa', 'Every tool in one place') },
       ],
     },
     {
@@ -89,6 +89,7 @@ export const homePage = {
             'Seuraa liidejä, asiakkaita ja myyntiputkea yhdestä näkymästä.',
             'Track leads, customers and sales pipelines in one view.',
           ),
+          brands: ['google', 'quickbooks'],
         },
         {
           icon: 'website',
@@ -97,6 +98,7 @@ export const homePage = {
             'Suunnittele ja julkaise ammattimaiset verkkosivut ja myyntisuppilot vaivattomasti.',
             'Design and launch professional websites and sales funnels with ease.',
           ),
+          brands: ['wordpress', 'shopify'],
         },
         {
           icon: 'automation',
@@ -105,6 +107,7 @@ export const homePage = {
             'Automatisoi kampanjat ja liidien hoivaus, niin viestit lähtevät oikeille ihmisille oikeaan aikaan.',
             'Automate campaigns and lead nurturing so the right message reaches the right people at the right time.',
           ),
+          brands: ['google', 'facebook'],
         },
         {
           icon: 'messages',
@@ -113,6 +116,7 @@ export const homePage = {
             'Tekstiviestit, sähköpostit ja sosiaalisen median viestit samassa postilaatikossa.',
             'SMS, email and social media messages in a single inbox.',
           ),
+          brands: ['whatsapp', 'messenger', 'instagram'],
         },
         {
           icon: 'social',
@@ -121,6 +125,7 @@ export const homePage = {
             'Suunnittele, ajasta ja julkaise julkaisut kaikkiin kanaviisi kerralla.',
             'Plan, schedule and publish posts across all your channels at once.',
           ),
+          brands: ['facebook', 'instagram', 'google'],
         },
         {
           icon: 'payments',
@@ -129,6 +134,7 @@ export const homePage = {
             'Anna asiakkaiden varata aika itse ja hoida maksut automaattisesti.',
             'Let clients book their own appointments and process payments automatically.',
           ),
+          brands: ['googlecalendar', 'zoom', 'stripe', 'paypal'],
         },
       ],
     },
@@ -143,6 +149,7 @@ export const homePage = {
       ),
       items: [
         {
+          icon: 'layers',
           title: t('Yksi alusta', 'One platform'),
           text: t(
             'Hallinnoi asiakkuuksia, markkinointia ja automaatiota vaivattomasti yhdessä paikassa.',
@@ -150,6 +157,7 @@ export const homePage = {
           ),
         },
         {
+          icon: 'automation',
           title: t('Automaatio hoitaa rutiinit', 'Automation handles the routine'),
           text: t(
             'Anna automaation hoitaa toistuvat tehtävät ja keskity liiketoiminnan kasvuun.',
@@ -157,6 +165,7 @@ export const homePage = {
           ),
         },
         {
+          icon: 'piggy',
           title: t('Säästöä ohjelmakuluissa', 'Lower software costs'),
           text: t(
             'Yksi tilaus korvaa useita erillisiä ohjelmia, mikä säästää sekä aikaa että rahaa.',
@@ -177,6 +186,7 @@ export const homePage = {
       plans: [
         {
           name: t('Perus', 'Basic'),
+          icon: 'rocket',
           price: '$97',
           description: t(
             'Perustyökalut asiakkuuksien ja myynnin hallintaan.',
@@ -198,6 +208,7 @@ export const homePage = {
         },
         {
           name: t('Ammattilainen', 'Pro'),
+          icon: 'star',
           price: '$297',
           highlighted: true,
           description: t(
@@ -221,6 +232,7 @@ export const homePage = {
         },
         {
           name: t('Eliitti', 'Agency'),
+          icon: 'crown',
           price: '$497',
           description: t(
             'Toimistoille ja yrityksille, jotka haluavat kaiken irti automaatiosta.',

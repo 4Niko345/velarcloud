@@ -1,4 +1,5 @@
 import type { BenefitsBlock } from '@/payload/payload-types'
+import { icons } from '@/components/icons'
 import { container, SectionHeader } from './shared'
 
 export function Benefits({ block }: { block: BenefitsBlock }) {
@@ -21,20 +22,29 @@ export function Benefits({ block }: { block: BenefitsBlock }) {
           onDark
         />
         <ol className="grid gap-4">
-          {(block.items ?? []).map((item, index) => (
+          {(block.items ?? []).map((item, index) => {
+            const Icon = item.icon ? icons[item.icon] : null
+            return (
             <li
               key={item.id ?? item.title}
               className="flex gap-5 rounded-2xl border border-gold/15 bg-white/[0.03] p-6"
             >
-              <span aria-hidden className="font-display text-2xl font-semibold text-gold">
-                {String(index + 1).padStart(2, '0')}
-              </span>
+              {Icon ? (
+                <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-gold/10 text-gold ring-1 ring-gold/35">
+                  <Icon className="size-5" strokeWidth={1.75} aria-hidden />
+                </span>
+              ) : (
+                <span aria-hidden className="font-display text-2xl font-semibold text-gold">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+              )}
               <div>
                 <h3 className="font-display text-lg font-semibold">{item.title}</h3>
                 {item.text && <p className="mt-1.5 leading-relaxed text-white/70">{item.text}</p>}
               </div>
             </li>
-          ))}
+            )
+          })}
         </ol>
       </div>
     </section>

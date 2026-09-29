@@ -16,12 +16,20 @@ export const LogoCloudBlock: Block = {
         {
           type: 'row',
           fields: [
-            { name: 'name', type: 'text', required: true },
+            {
+              name: 'name',
+              type: 'text',
+              required: true,
+              admin: { description: 'Google, Stripe, Shopify… show their logo automatically.' },
+            },
             {
               name: 'logo',
               type: 'upload',
               relationTo: 'media',
-              admin: { description: 'Optional. Without a logo the name is shown as text.' },
+              admin: {
+                description:
+                  'Official logo (SVG/PNG) for brands without a built-in one, e.g. Slack, Twilio, OpenAI. Overrides the built-in logo.',
+              },
             },
           ],
         },

@@ -20,6 +20,18 @@
   --color-gold-strong: #b08d45; /* hover */
   --color-gold-soft: #e7d09a; /* champagne, light accents on dark */
   --color-gold-ink: #8a6a2a; /* gold text/icons on white or ivory (≥ 4.7:1) */
+
+  /* Logo row: the track holds the list twice, so -50% loops seamlessly. */
+  --animate-marquee: marquee 45s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 /* Fonts come from next/font variables set on <html> in app/(frontend)/[lang]/layout.tsx. */

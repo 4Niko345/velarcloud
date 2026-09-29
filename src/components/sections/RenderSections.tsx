@@ -20,7 +20,7 @@ export function RenderSections({ sections, ctx }: { sections: Section[]; ctx: Se
       case 'logoCloud':
         return <LogoCloud key={key} block={block} />
       case 'features':
-        return <Features key={key} block={block} />
+        return <Features key={key} block={block} ctx={ctx} />
       case 'benefits':
         return <Benefits key={key} block={block} />
       case 'pricing':

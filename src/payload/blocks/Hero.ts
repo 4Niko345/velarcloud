@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { anchorField, eyebrowField } from '../fields/anchor'
+import { iconField } from '../fields/icon'
 import { linksField } from '../fields/link'
 
 export const HeroBlock: Block = {
@@ -26,8 +27,16 @@ export const HeroBlock: Block = {
       name: 'highlights',
       type: 'array',
       maxRows: 4,
-      admin: { description: 'Short points shown with a check mark under the buttons.' },
-      fields: [{ name: 'text', type: 'text', required: true, localized: true }],
+      admin: { description: 'Short points with an icon under the buttons.' },
+      fields: [
+        {
+          type: 'row',
+          fields: [
+            iconField({ defaultValue: 'check' }),
+            { name: 'text', type: 'text', required: true, localized: true },
+          ],
+        },
+      ],
     },
     {
       name: 'image',

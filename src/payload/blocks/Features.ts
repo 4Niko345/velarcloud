@@ -1,17 +1,7 @@
 import type { Block } from 'payload'
 import { anchorField, eyebrowField } from '../fields/anchor'
-
-// Keys map to icons in src/components/sections/icons.ts.
-export const featureIcons = [
-  { label: 'CRM / people', value: 'crm' },
-  { label: 'Website', value: 'website' },
-  { label: 'Automation', value: 'automation' },
-  { label: 'Messages', value: 'messages' },
-  { label: 'Social scheduling', value: 'social' },
-  { label: 'Payments', value: 'payments' },
-  { label: 'AI', value: 'ai' },
-  { label: 'Reports', value: 'reports' },
-]
+import { brandOptions } from '../fields/brands'
+import { iconField } from '../fields/icon'
 
 export const FeaturesBlock: Block = {
   slug: 'features',
@@ -30,11 +20,18 @@ export const FeaturesBlock: Block = {
         {
           type: 'row',
           fields: [
-            { name: 'icon', type: 'select', required: true, defaultValue: 'crm', options: featureIcons },
+            iconField({ required: true, defaultValue: 'crm' }),
             { name: 'title', type: 'text', required: true, localized: true },
           ],
         },
         { name: 'text', type: 'textarea', localized: true },
+        {
+          name: 'brands',
+          type: 'select',
+          hasMany: true,
+          options: [...brandOptions],
+          admin: { description: 'Optional small logos under the text, e.g. the services this works with.' },
+        },
       ],
     },
   ],

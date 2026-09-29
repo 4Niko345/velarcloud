@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { anchorField, eyebrowField } from '../fields/anchor'
+import { iconField } from '../fields/icon'
 
 export const BenefitsBlock: Block = {
   slug: 'benefits',
@@ -16,7 +17,13 @@ export const BenefitsBlock: Block = {
       minRows: 1,
       maxRows: 6,
       fields: [
-        { name: 'title', type: 'text', required: true, localized: true },
+        {
+          type: 'row',
+          fields: [
+            iconField({ admin: { description: 'Optional. Without one, items are numbered.' } }),
+            { name: 'title', type: 'text', required: true, localized: true },
+          ],
+        },
         { name: 'text', type: 'textarea', localized: true },
       ],
     },

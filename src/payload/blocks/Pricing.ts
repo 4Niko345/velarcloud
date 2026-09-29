@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { anchorField, eyebrowField } from '../fields/anchor'
+import { iconField } from '../fields/icon'
 import { linkFields } from '../fields/link'
 
 export const PricingBlock: Block = {
@@ -39,6 +40,7 @@ export const PricingBlock: Block = {
         {
           type: 'row',
           fields: [
+            iconField({ admin: { description: 'Optional, shown next to the plan name.' } }),
             {
               name: 'highlighted',
               type: 'checkbox',

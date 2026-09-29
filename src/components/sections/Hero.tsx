@@ -1,9 +1,10 @@
 import Image from 'next/image'
-import { CalendarCheck, Check, Workflow } from 'lucide-react'
+import { CalendarCheck, Workflow } from 'lucide-react'
 import type { Dictionary } from '@/i18n/dictionaries'
 import { resolveLink } from '@/lib/links'
 import type { HeroBlock } from '@/payload/payload-types'
 import { ButtonLink } from '@/components/ui/ButtonLink'
+import { icons } from '@/components/icons'
 import { HeroBackground } from './HeroBackground'
 import { container, type SectionContext } from './shared'
 
@@ -56,12 +57,15 @@ export function Hero({ block, ctx }: { block: HeroBlock; ctx: SectionContext }) 
 
           {block.highlights && block.highlights.length > 0 && (
             <ul className="mt-8 flex flex-col gap-2.5 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-6">
-              {block.highlights.map((item) => (
-                <li key={item.id ?? item.text} className="flex items-center gap-2">
-                  <Check className="size-4 shrink-0 text-gold" aria-hidden />
-                  {item.text}
-                </li>
-              ))}
+              {block.highlights.map((item) => {
+                const Icon = icons[item.icon ?? 'check']
+                return (
+                  <li key={item.id ?? item.text} className="flex items-center gap-2">
+                    <Icon className="size-4 shrink-0 text-gold" strokeWidth={1.75} aria-hidden />
+                    {item.text}
+                  </li>
+                )
+              })}
             </ul>
           )}
         </div>

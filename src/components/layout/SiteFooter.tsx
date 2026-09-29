@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import { Mail } from 'lucide-react'
+import { BrandLogo, brandFromName } from '@/components/brands/BrandLogo'
 import { localePath, type Locale } from '@/i18n/config'
 import type { Dictionary } from '@/i18n/dictionaries'
 import { localizeHref } from '@/lib/links'
@@ -8,6 +10,7 @@ import { Logo } from './Logo'
 type SiteFooterProps = { locale: Locale; settings: SiteSetting; dict: Dictionary }
 
 const linkClass = 'rounded hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-gold'
+const iconLinkClass = 'inline-flex items-center gap-2.5'
 const headingClass = 'text-xs font-semibold uppercase tracking-[0.18em] text-gold'
 
 export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
@@ -50,18 +53,32 @@ export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
             <ul className="mt-4 space-y-3">
               {settings.contactEmail && (
                 <li>
-                  <a href={`mailto:${settings.contactEmail}`} className={linkClass}>
+                  <a href={`mailto:${settings.contactEmail}`} className={`${linkClass} ${iconLinkClass}`}>
+                    <Mail className="size-4 text-gold" strokeWidth={1.75} aria-hidden />
                     {settings.contactEmail}
                   </a>
                 </li>
               )}
-              {social.map((item) => (
-                <li key={item.id ?? item.url}>
-                  <a href={item.url} className={linkClass} rel="noopener noreferrer" target="_blank">
-                    {item.platform}
-                  </a>
-                </li>
-              ))}
+              {social.map((item) => {
+                const brand = brandFromName(item.platform)
+                return (
+                  <li key={item.id ?? item.url}>
+                    <a
+                      href={item.url}
+                      className={`${linkClass} ${iconLinkClass}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {brand ? (
+                        <BrandLogo brand={brand} size={16} className="text-gold" decorative />
+                      ) : (
+                        <span aria-hidden className="size-4" />
+                      )}
+                      {item.platform}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
         )}
