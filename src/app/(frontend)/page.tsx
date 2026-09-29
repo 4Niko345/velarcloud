@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { BuyNowButton } from '@/components/BuyNowButton'
 import { PageView } from '@/components/PageView'
 import { getPageBySlug } from '@/lib/pages'
 
@@ -16,12 +17,15 @@ export default async function HomePage() {
       <p className="mt-6 text-lg text-muted">
         Create and publish a page with the slug <code>home</code> to replace this placeholder.
       </p>
-      <Link
-        href="/admin"
-        className="mt-10 inline-block rounded-md bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-soft"
-      >
-        Open admin
-      </Link>
+      <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        <BuyNowButton />
+        <Link
+          href="/admin"
+          className="w-full rounded-md bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-soft sm:w-auto"
+        >
+          Open admin
+        </Link>
+      </div>
     </section>
   )
 }
