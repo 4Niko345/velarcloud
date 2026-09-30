@@ -6,6 +6,7 @@ import { Features } from './Features'
 import { Hero } from './Hero'
 import { LogoCloud } from './LogoCloud'
 import { Pricing } from './Pricing'
+import { Testimonials } from './Testimonials'
 import type { SectionContext } from './shared'
 
 type Section = NonNullable<Page['layout']>[number]
@@ -23,6 +24,8 @@ export function RenderSections({ sections, ctx }: { sections: Section[]; ctx: Se
         return <Features key={key} block={block} ctx={ctx} />
       case 'benefits':
         return <Benefits key={key} block={block} />
+      case 'testimonials':
+        return <Testimonials key={key} block={block} ctx={ctx} />
       case 'pricing':
         return <Pricing key={key} block={block} ctx={ctx} />
       case 'faq':

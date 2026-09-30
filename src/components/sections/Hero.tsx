@@ -16,7 +16,7 @@ export function Hero({ block, ctx }: { block: HeroBlock; ctx: SectionContext }) 
       <HeroBackground />
 
       <div
-        className={`${container} grid gap-14 pb-20 pt-14 sm:pt-20 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-28 lg:pt-24`}
+        className={`${container} grid gap-14 pb-16 pt-12 sm:pt-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-20 lg:pt-12 xl:grid-cols-[1.3fr_0.7fr]`}
       >
         <div>
           {block.eyebrow && (
@@ -24,13 +24,13 @@ export function Hero({ block, ctx }: { block: HeroBlock; ctx: SectionContext }) 
               {block.eyebrow}
             </p>
           )}
-          <h1 className="mt-6 font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl xl:text-6xl">
+          <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl xl:text-[3.5rem]">
             {block.heading}
           </h1>
-          {block.text && <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">{block.text}</p>}
+          {block.text && <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/75">{block.text}</p>}
 
           {block.links && block.links.length > 0 && (
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               {block.links.map((link) => {
                 const href = resolveLink(link, ctx.settings, ctx.locale)
                 return (
@@ -56,7 +56,7 @@ export function Hero({ block, ctx }: { block: HeroBlock; ctx: SectionContext }) 
           )}
 
           {block.highlights && block.highlights.length > 0 && (
-            <ul className="mt-8 flex flex-col gap-2.5 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-6">
+            <ul className="mt-6 flex flex-col gap-2.5 text-sm text-white/80 sm:flex-row sm:flex-wrap sm:gap-x-5">
               {block.highlights.map((item) => {
                 const Icon = icons[item.icon ?? 'check']
                 return (
@@ -93,7 +93,7 @@ function HeroIllustration({ labels }: { labels: Dictionary['illustration'] }) {
   const cards = [3, 2, 2]
   return (
     <div aria-hidden className="relative mx-auto w-full max-w-md px-2 lg:max-w-none">
-      <div className="rounded-2xl border border-gold/20 bg-white/[0.04] p-4 shadow-2xl shadow-black/60 backdrop-blur sm:p-5">
+      <div className="rounded-2xl border border-gold/20 bg-white/[0.04] p-4 shadow-2xl shadow-black/60 backdrop-blur motion-safe:animate-float sm:p-5">
         <div className="flex items-center gap-2">
           <span className="size-2.5 rounded-full bg-white/20" />
           <span className="size-2.5 rounded-full bg-white/20" />
@@ -122,7 +122,7 @@ function HeroIllustration({ labels }: { labels: Dictionary['illustration'] }) {
         </div>
       </div>
 
-      <div className="absolute -bottom-6 left-0 flex items-center gap-3 rounded-xl bg-white p-3 pr-4 text-ink-950 shadow-xl sm:-left-6">
+      <div className="absolute -bottom-6 left-0 flex items-center gap-3 rounded-xl bg-white p-3 pr-4 text-ink-950 shadow-xl motion-safe:animate-float-delayed sm:-left-6">
         <span className="flex size-9 items-center justify-center rounded-lg bg-gold/15 text-gold-ink">
           <Workflow className="size-4" />
         </span>
@@ -134,7 +134,7 @@ function HeroIllustration({ labels }: { labels: Dictionary['illustration'] }) {
         </span>
       </div>
 
-      <div className="absolute -top-5 right-0 flex items-center gap-2.5 rounded-xl bg-white p-2.5 pr-3.5 text-ink-950 shadow-xl sm:-right-4">
+      <div className="absolute -top-5 right-0 flex items-center gap-2.5 rounded-xl bg-white p-2.5 pr-3.5 text-ink-950 shadow-xl motion-safe:animate-float-delayed sm:-right-4">
         <span className="flex size-8 items-center justify-center rounded-lg bg-gold/15 text-gold-ink">
           <CalendarCheck className="size-4" />
         </span>

@@ -16,8 +16,9 @@ export function Faq({ block }: { block: FaqBlock }) {
           align="left"
         />
         <div className="divide-y divide-border rounded-2xl border border-border bg-white">
-          {(block.items ?? []).map((item) => (
-            <details key={item.id ?? item.question} className="group px-5 sm:px-6">
+          {(block.items ?? []).map((item, index) => (
+            // First answer starts open so the section reads as content, not a wall of closed rows.
+            <details key={item.id ?? item.question} open={index === 0} className="group px-5 sm:px-6">
               <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold hover:text-gold-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-ink [&::-webkit-details-marker]:hidden">
                 {item.question}
                 <ChevronDown

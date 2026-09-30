@@ -17,6 +17,17 @@ const fi = {
   rightsReserved: 'Kaikki oikeudet pidätetään.',
   placeholder: 'Luo ja julkaise hallinnassa sivu, jonka tunniste on home, tai aja npm run seed.',
   openAdmin: 'Avaa hallinta',
+  billingPeriod: 'Laskutusjakso',
+  /** "{n}" is replaced with the star count. */
+  rating: 'Arvio {n}/5 tähteä',
+  quote: { open: '”', close: '”' },
+  pricingCategories: {
+    crm: 'CRM ja myynti',
+    automation: 'Automaatio',
+    website: 'Verkkosivut ja sisältö',
+    marketing: 'Markkinointi ja kanavat',
+    support: 'Tuki ja palvelut',
+  },
   illustration: {
     pipeline: 'Myyntiputki',
     stages: ['Uudet', 'Tarjous', 'Voitettu'],
@@ -43,6 +54,16 @@ const en: Dictionary = {
   rightsReserved: 'All rights reserved.',
   placeholder: 'Create and publish a page with the slug home in the admin, or run npm run seed.',
   openAdmin: 'Open admin',
+  billingPeriod: 'Billing period',
+  rating: 'Rated {n} out of 5',
+  quote: { open: '“', close: '”' },
+  pricingCategories: {
+    crm: 'CRM & sales',
+    automation: 'Automation',
+    website: 'Websites & content',
+    marketing: 'Marketing & channels',
+    support: 'Support & services',
+  },
   illustration: {
     pipeline: 'Sales pipeline',
     stages: ['New', 'Proposal', 'Won'],
