@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* The site has no dark theme: dark: classes apply only under a .dark class (never set),
+   not from the visitor's system setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Velar Cloud luxury theme: white, ivory, gold and a warm near-black. */
 @theme {
   /* Light surfaces */
