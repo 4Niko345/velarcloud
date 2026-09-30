@@ -80,7 +80,7 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
             />
           )}
 
-          <ul className={`${hasYearly ? 'mt-10 lg:mt-12' : 'mt-12 lg:mt-16'} grid gap-6 lg:grid-cols-3 lg:items-center`}>
+          <ul className={`${hasYearly ? '' : 'mt-12 lg:mt-16'} grid gap-6 lg:grid-cols-3 lg:items-center`}>
             {plans.map((plan) => {
               const dark = Boolean(plan.highlighted)
               const href = plan.link?.label ? resolveLink(plan.link, ctx.settings, ctx.locale) : null
