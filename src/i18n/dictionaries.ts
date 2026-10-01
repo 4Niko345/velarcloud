@@ -18,6 +18,14 @@ const fi = {
   placeholder: 'Luo ja julkaise hallinnassa sivu, jonka tunniste on home, tai aja npm run seed.',
   openAdmin: 'Avaa hallinta',
   billingPeriod: 'Laskutusjakso',
+  blog: {
+    title: 'Blogi',
+    intro: 'Seuraa uusimpia asiakkuudenhallinnan, tekoälyn ja automaation trendejä.',
+    readMore: 'Lue lisää',
+    empty: 'Ensimmäiset artikkelit ovat tulossa pian.',
+    back: 'Takaisin blogiin',
+    dateLocale: 'fi-FI',
+  },
   /** "{n}" is replaced with the star count. */
   rating: 'Arvio {n}/5 tähteä',
   quote: { open: '”', close: '”' },
@@ -55,6 +63,14 @@ const en: Dictionary = {
   placeholder: 'Create and publish a page with the slug home in the admin, or run npm run seed.',
   openAdmin: 'Open admin',
   billingPeriod: 'Billing period',
+  blog: {
+    title: 'Blog',
+    intro: 'Follow the latest trends in CRM, AI and automation.',
+    readMore: 'Read more',
+    empty: 'The first articles are coming soon.',
+    back: 'Back to the blog',
+    dateLocale: 'en-GB',
+  },
   rating: 'Rated {n} out of 5',
   quote: { open: '“', close: '”' },
   pricingCategories: {

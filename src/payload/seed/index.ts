@@ -1,18 +1,23 @@
 /**
- * Fills an empty database with the front page and site settings in Finnish
- * and English. Skips anything that already exists unless run with "force".
+ * Fills an empty database with the site's pages (home, pricing, contact), their
+ * photos and the site settings, in Finnish and English. Skips anything that
+ * already exists unless run with "force".
  *
  *   npm run seed
- *   npm run seed -- force   # overwrite the home page and site settings
+ *   npm run seed -- force   # overwrite the seeded pages and site settings
  *
  * (A positional word, not --force: `payload run` passes only positional arguments on.)
  */
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import config from '../../../payload.config'
 import { defaultLocale, locales, type Locale } from '../../i18n/config'
-import { homePage, siteSettings, type Localized } from './content'
+import { mediaFiles, pages, siteSettings, type Localized, type MediaKey } from './content'
 
 type Data = Record<string, unknown>
+
+const mediaDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 'media')
 
 const isLocalized = (value: unknown): value is Localized =>
   typeof value === 'object' &&
@@ -27,6 +32,16 @@ function pick(value: unknown, locale: Locale): unknown {
   if (Array.isArray(value)) return value.map((item) => pick(item, locale))
   if (value && typeof value === 'object') {
     return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, pick(item, locale)]))
+  }
+  return value
+}
+
+/** Replaces every media('key') placeholder with the uploaded document's id. */
+function withMedia(value: unknown, ids: Record<MediaKey, number>): unknown {
+  if (Array.isArray(value)) return value.map((item) => withMedia(item, ids))
+  if (value && typeof value === 'object') {
+    if ('$media' in value) return ids[(value as { $media: MediaKey }).$media]
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, withMedia(item, ids)]))
   }
   return value
 }
@@ -54,19 +69,46 @@ const force = process.argv.includes('force')
 const otherLocales = locales.filter((code) => code !== defaultLocale)
 const payload = await getPayload({ config })
 
-// Front page
-const existing = await payload.find({
-  collection: 'pages',
-  where: { slug: { equals: 'home' } },
-  limit: 1,
-  depth: 0,
-  draft: true,
-})
+// Photos: upload once (matched by file name), alt text in every language.
+const mediaIds = {} as Record<MediaKey, number>
+for (const [key, { file, alt }] of Object.entries(mediaFiles) as [MediaKey, (typeof mediaFiles)[MediaKey]][]) {
+  const existing = await payload.find({ collection: 'media', where: { filename: { equals: file } }, limit: 1, depth: 0 })
+  if (existing.docs[0]) {
+    mediaIds[key] = existing.docs[0].id
+    continue
+  }
+  const created = await payload.create({
+    collection: 'media',
+    locale: defaultLocale,
+    data: { alt: alt[defaultLocale] },
+    filePath: path.join(mediaDir, file),
+  })
+  for (const locale of otherLocales) {
+    await payload.update({ collection: 'media', id: created.id, locale, data: { alt: alt[locale] } })
+  }
+  mediaIds[key] = created.id
+  payload.logger.info(`Uploaded ${file}.`)
+}
 
-if (existing.docs[0] && !force) {
-  payload.logger.info('Home page exists, skipping (run `npm run seed -- force` to overwrite).')
-} else {
-  const data = { ...(pick(homePage, defaultLocale) as Data), _status: 'published' }
+// Pages, matched by their Finnish slug.
+for (const page of pages) {
+  const content = withMedia(page, mediaIds)
+  const slug = pick(page.slug, defaultLocale) as string
+  const existing = await payload.find({
+    collection: 'pages',
+    where: { slug: { equals: slug } },
+    locale: defaultLocale,
+    limit: 1,
+    depth: 0,
+    draft: true,
+  })
+
+  if (existing.docs[0] && !force) {
+    payload.logger.info(`Page "${slug}" exists, skipping (run \`npm run seed -- force\` to overwrite).`)
+    continue
+  }
+
+  const data = { ...(pick(content, defaultLocale) as Data), _status: 'published' }
   let saved = existing.docs[0]
     ? await payload.update({
         collection: 'pages',
@@ -86,12 +128,12 @@ if (existing.docs[0] && !force) {
       id: saved.id,
       locale,
       data: {
-        ...(withIds(pick(homePage, locale), saved) as Data),
+        ...(withIds(pick(content, locale), saved) as Data),
         _status: 'published',
       } as Partial<RequiredDataFromCollectionSlug<'pages'>>,
     })
   }
-  payload.logger.info(`Home page seeded (${locales.join(', ')}).`)
+  payload.logger.info(`Page "${slug}" seeded (${locales.join(', ')}).`)
 }
 
 // Site settings

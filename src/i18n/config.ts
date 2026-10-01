@@ -21,3 +21,13 @@ export function localePath(locale: Locale, path = '/'): string {
   if (locale === defaultLocale) return clean
   return clean === '/' ? `/${locale}` : `/${locale}${clean}`
 }
+
+/**
+ * The blog's URL segment per language. Internally the route is app/(frontend)/[lang]/blog;
+ * src/proxy.ts maps /blogi/… onto it for Finnish.
+ */
+export const blogSegment: Record<Locale, string> = { fi: 'blogi', en: 'blog' }
+
+/** ('fi') → '/blogi', ('en', 'my-post') → '/en/blog/my-post'. */
+export const blogPath = (locale: Locale, slug?: string): string =>
+  localePath(locale, `/${blogSegment[locale]}${slug ? `/${slug}` : ''}`)

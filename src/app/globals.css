@@ -4,26 +4,26 @@
    not from the visitor's system setting. */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Velar Cloud luxury theme: white, ivory, gold and a warm near-black. */
+/* Velar Cloud brand, from the original velarcloud.fi: deep navy + cloud blue. */
 @theme {
   /* Light surfaces */
   --color-background: #ffffff;
-  --color-surface: #faf8f4; /* ivory, for alternating sections */
-  --color-foreground: #16140f; /* text on light */
-  --color-muted: #6b665e; /* warm gray, ≥ 5.3:1 on white and ivory */
-  --color-border: #e9e4da;
+  --color-surface: #f4f7fa; /* cool light gray, for alternating sections */
+  --color-foreground: #0b1b33; /* text on light */
+  --color-muted: #52627a; /* ≥ 5.6:1 on white and surface */
+  --color-border: #e2e8f0;
 
-  /* Dark surfaces: a warm charcoal-black rather than pure #000, which looks
-     flat on screens and makes white text glare; the steps allow layering. */
-  --color-ink-950: #0e0d0c;
-  --color-ink-900: #171614;
-  --color-ink-800: #22201c;
+  /* Navy surfaces (velarcloud.fi used #002244 and #003366) */
+  --color-navy-950: #00172e;
+  --color-navy-900: #002244;
+  --color-navy-800: #003366;
 
-  /* Gold */
-  --color-gold: #c9a55c; /* buttons, lines and accents on dark */
-  --color-gold-strong: #b08d45; /* hover */
-  --color-gold-soft: #e7d09a; /* champagne, light accents on dark */
-  --color-gold-ink: #8a6a2a; /* gold text/icons on white or ivory (≥ 4.7:1) */
+  /* Blue */
+  --color-brand: #2876e7; /* the old site's blue: accents, rings, glows */
+  --color-brand-ink: #1f66d1; /* blue text on light, and buttons with white text (5.4:1); #2876e7 is 4.3:1 */
+  --color-brand-deep: #184f9f; /* button hover */
+  --color-brand-soft: #8ec5ff; /* light blue text, icons and lines on navy */
+  --color-brand-pale: #d6e8ff; /* lightest accent on navy */
 
   /* Logo row: the track holds the list twice, so -50% loops seamlessly. */
   --animate-marquee: marquee 45s linear infinite;
@@ -91,7 +91,7 @@
   }
 
   ::selection {
-    background: rgb(201 165 92 / 0.35);
+    background: rgb(40 118 231 / 0.25);
   }
 
   /* Long Finnish compounds must wrap on narrow screens instead of overflowing.

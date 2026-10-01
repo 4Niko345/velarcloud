@@ -32,7 +32,7 @@ function groupFeatures(features: Feature[]) {
 }
 
 function FeatureList({ items, dark }: { items: Feature[]; dark: boolean }) {
-  const markColor = dark ? 'text-gold' : 'text-gold-ink'
+  const markColor = dark ? 'text-brand-soft' : 'text-brand-ink'
   return (
     <ul className="mt-3 space-y-2.5 text-sm">
       {items.map((feature) => {
@@ -68,7 +68,13 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
   return (
     <section id={block.anchor || undefined} aria-labelledby={headingId} className="bg-white py-20 sm:py-24">
       <div className={container}>
-        <SectionHeader id={headingId} eyebrow={block.eyebrow} heading={block.heading} text={block.text} />
+        <SectionHeader
+          id={headingId}
+          eyebrow={block.eyebrow}
+          heading={block.heading}
+          text={block.text}
+          as={ctx.headingLevel}
+        />
 
         <BillingProvider>
           {hasYearly && (
@@ -91,7 +97,7 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
                   key={plan.id ?? plan.name}
                   className={`flex flex-col rounded-3xl p-6 sm:p-8 ${
                     dark
-                      ? 'bg-ink-950 text-white shadow-2xl shadow-ink-950/30 ring-1 ring-gold/60 lg:py-12'
+                      ? 'bg-navy-950 text-white shadow-2xl shadow-navy-950/30 ring-1 ring-brand/60 lg:py-12'
                       : 'border border-border bg-white'
                   }`}
                 >
@@ -100,7 +106,7 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
                       {PlanIcon && (
                         <span
                           className={`flex size-10 items-center justify-center rounded-xl ring-1 ${
-                            dark ? 'bg-gold/10 text-gold ring-gold/40' : 'bg-ink-950 text-gold ring-gold/30'
+                            dark ? 'bg-brand/10 text-brand-soft ring-brand/40' : 'bg-navy-950 text-brand-soft ring-brand/30'
                           }`}
                         >
                           <PlanIcon className="size-[1.125rem]" strokeWidth={1.75} aria-hidden />
@@ -109,7 +115,7 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
                       <h3 className="font-display text-xl font-semibold">{plan.name}</h3>
                     </div>
                     {plan.badge && (
-                      <span className="rounded-full bg-gold px-3 py-1 text-xs font-semibold text-ink-950">
+                      <span className="rounded-full bg-brand-ink px-3 py-1 text-xs font-semibold text-white">
                         {plan.badge}
                       </span>
                     )}
@@ -149,7 +155,7 @@ export function Pricing({ block, ctx }: { block: PricingBlock; ctx: SectionConte
                           <div key={category} className="mt-5">
                             <h4
                               className={`flex items-center gap-2 text-[0.7rem] font-semibold uppercase tracking-[0.14em] ${
-                                dark ? 'text-gold' : 'text-gold-ink'
+                                dark ? 'text-brand-soft' : 'text-brand-ink'
                               }`}
                             >
                               <CategoryIcon className="size-3.5" strokeWidth={2} aria-hidden />

@@ -7,6 +7,7 @@ import { ButtonLink } from '@/components/ui/ButtonLink'
 import { LanguageSwitcher } from './LanguageSwitcher'
 import { Logo } from './Logo'
 import { MobileMenu } from './MobileMenu'
+import { NavLink } from './NavLink'
 
 type SiteHeaderProps = { locale: Locale; settings: SiteSetting; dict: Dictionary }
 
@@ -21,12 +22,12 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
   const cta = ctaHref ? { label: settings.headerCta.label, href: ctaHref } : null
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold/15 bg-ink-950/90 text-white backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-navy-950/90 text-white backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:px-6">
         <Link
           href={localePath(locale)}
           aria-label="Velar Cloud"
-          className="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+          className="shrink-0 rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-soft"
         >
           <Logo logo={settings.logo} />
         </Link>
@@ -36,12 +37,12 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
             <ul className="flex items-center gap-1">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <NavLink
                     href={item.href}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-gold"
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-brand-soft aria-[current=page]:bg-white/10 aria-[current=page]:text-white"
                   >
                     {item.label}
-                  </a>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -53,7 +54,7 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
           {login && (
             <a
               href={login.href}
-              className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/80 hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-gold lg:block"
+              className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/80 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-soft lg:block"
             >
               {login.label}
             </a>

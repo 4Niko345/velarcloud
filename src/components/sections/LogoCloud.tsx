@@ -2,6 +2,7 @@ import Image from 'next/image'
 import type { LogoCloudBlock } from '@/payload/payload-types'
 import { BrandLogo, brandFromName } from '@/components/brands/BrandLogo'
 import { container } from './shared'
+import { mediaSrc } from '@/lib/media'
 
 type Item = NonNullable<LogoCloudBlock['items']>[number]
 
@@ -11,7 +12,7 @@ function Logo({ item }: { item: Item }) {
   if (upload?.url) {
     return (
       <Image
-        src={upload.url}
+        src={mediaSrc(upload.url)}
         alt={item.name}
         title={item.name}
         width={upload.width ?? 120}
@@ -31,7 +32,7 @@ function LogoList({ items, hidden = false }: { items: Item[]; hidden?: boolean }
       {items.map((item, index) => (
         <li
           key={item.id ?? `${item.name}-${index}`}
-          className="flex h-10 items-center text-foreground/60 transition-colors hover:text-gold-ink"
+          className="flex h-10 items-center text-foreground/60 transition-colors hover:text-brand-ink"
         >
           <Logo item={item} />
         </li>

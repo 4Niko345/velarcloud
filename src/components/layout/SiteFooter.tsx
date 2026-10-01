@@ -9,9 +9,9 @@ import { Logo } from './Logo'
 
 type SiteFooterProps = { locale: Locale; settings: SiteSetting; dict: Dictionary }
 
-const linkClass = 'rounded hover:text-gold-soft focus-visible:outline-2 focus-visible:outline-gold'
+const linkClass = 'rounded hover:text-white focus-visible:outline-2 focus-visible:outline-brand-soft'
 const iconLinkClass = 'inline-flex items-center gap-2.5'
-const headingClass = 'text-xs font-semibold uppercase tracking-[0.18em] text-gold'
+const headingClass = 'text-xs font-semibold uppercase tracking-[0.18em] text-brand-soft'
 
 export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
   const nav = settings.nav ?? []
@@ -19,13 +19,13 @@ export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
   const legal = settings.legalLinks ?? []
 
   return (
-    <footer className="border-t border-gold/20 bg-ink-950 text-sm text-white/70">
+    <footer className="border-t border-white/10 bg-navy-950 text-sm text-white/70">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-2 sm:px-6 lg:grid-cols-[1.6fr_1fr_1fr_1fr]">
         <div className="max-w-xs">
           <Link
             href={localePath(locale)}
             aria-label="Velar Cloud"
-            className="inline-block rounded text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            className="inline-block rounded text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-soft"
           >
             <Logo logo={settings.logo} />
           </Link>
@@ -54,7 +54,7 @@ export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
               {settings.contactEmail && (
                 <li>
                   <a href={`mailto:${settings.contactEmail}`} className={`${linkClass} ${iconLinkClass}`}>
-                    <Mail className="size-4 text-gold" strokeWidth={1.75} aria-hidden />
+                    <Mail className="size-4 text-brand-soft" strokeWidth={1.75} aria-hidden />
                     {settings.contactEmail}
                   </a>
                 </li>
@@ -70,7 +70,7 @@ export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
                       target="_blank"
                     >
                       {brand ? (
-                        <BrandLogo brand={brand} size={16} className="text-gold" decorative />
+                        <BrandLogo brand={brand} size={16} className="text-brand-soft" decorative />
                       ) : (
                         <span aria-hidden className="size-4" />
                       )}
@@ -99,7 +99,7 @@ export function SiteFooter({ locale, settings, dict }: SiteFooterProps) {
         )}
       </div>
 
-      <div className="border-t border-gold/15">
+      <div className="border-t border-white/10">
         <p className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
           © {new Date().getFullYear()} Velar Cloud. {dict.rightsReserved}
         </p>

@@ -26,6 +26,12 @@ export const FeaturesBlock: Block = {
         },
         { name: 'text', type: 'textarea', localized: true },
         {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          admin: { description: 'Optional photo at the top of the card.' },
+        },
+        {
           name: 'brands',
           type: 'select',
           hasMany: true,

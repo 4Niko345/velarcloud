@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { hasLocale } from '@/i18n/config'
+import { hasLocale, localePath, locales } from '@/i18n/config'
 import { getDictionary } from '@/i18n/dictionaries'
 import { pageMetadata } from '@/lib/metadata'
 import { getPageBySlug } from '@/lib/pages'
@@ -15,7 +15,14 @@ type Args = { params: Promise<{ lang: string }> }
 export async function generateMetadata({ params }: Args): Promise<Metadata> {
   const { lang } = await params
   if (!hasLocale(lang)) return {}
-  return pageMetadata(await getPageBySlug('home', lang), lang, '/', true)
+  const page = await getPageBySlug('home', lang)
+  return pageMetadata({
+    title: page?.title,
+    description: page?.description,
+    locale: lang,
+    paths: Object.fromEntries(locales.map((code) => [code, localePath(code)])),
+    absoluteTitle: true,
+  })
 }
 
 export default async function HomePage({ params }: Args) {
@@ -33,7 +40,7 @@ export default async function HomePage({ params }: Args) {
       <p className="mt-6 text-lg text-muted">{dict.placeholder}</p>
       <Link
         href="/admin"
-        className="mt-10 inline-flex min-h-11 items-center rounded-full bg-gold px-6 text-sm font-semibold text-ink-950 hover:bg-gold-strong"
+        className="mt-10 inline-flex min-h-11 items-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep"
       >
         {dict.openAdmin}
       </Link>

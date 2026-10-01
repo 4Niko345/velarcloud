@@ -1,8 +1,8 @@
 import { ChevronDown } from 'lucide-react'
 import type { FaqBlock } from '@/payload/payload-types'
-import { container, SectionHeader } from './shared'
+import { container, SectionHeader, type SectionContext } from './shared'
 
-export function Faq({ block }: { block: FaqBlock }) {
+export function Faq({ block, ctx }: { block: FaqBlock; ctx: SectionContext }) {
   const headingId = `${block.id}-heading`
 
   return (
@@ -14,15 +14,16 @@ export function Faq({ block }: { block: FaqBlock }) {
           heading={block.heading}
           text={block.text}
           align="left"
+          as={ctx.headingLevel}
         />
         <div className="divide-y divide-border rounded-2xl border border-border bg-white">
           {(block.items ?? []).map((item, index) => (
             // First answer starts open so the section reads as content, not a wall of closed rows.
             <details key={item.id ?? item.question} open={index === 0} className="group px-5 sm:px-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold hover:text-gold-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-ink [&::-webkit-details-marker]:hidden">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold hover:text-brand-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-ink [&::-webkit-details-marker]:hidden">
                 {item.question}
                 <ChevronDown
-                  className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180 group-open:text-gold-ink"
+                  className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180 group-open:text-brand-ink"
                   aria-hidden
                 />
               </summary>

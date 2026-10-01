@@ -1,5 +1,6 @@
 import type { Block } from 'payload'
 import { BenefitsBlock } from './Benefits'
+import { ContactBlock } from './Contact'
 import { CtaBlock } from './Cta'
 import { FaqBlock } from './Faq'
 import { FeaturesBlock } from './Features'
@@ -17,5 +18,6 @@ export const pageBlocks: Block[] = [
   TestimonialsBlock,
   PricingBlock,
   FaqBlock,
+  ContactBlock,
   CtaBlock,
 ]

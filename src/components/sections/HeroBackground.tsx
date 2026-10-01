@@ -1,20 +1,20 @@
 /**
- * Charcoal-black with a fine gold lattice of interlocking eight-point stars and
+ * Deep navy with a fine light-blue lattice of interlocking eight-point stars and
  * a few long hairline curves woven across it. Kept faint and faded out behind
  * the text column so it reads as texture, not decoration.
  */
 export function HeroBackground() {
   return (
-    <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden bg-ink-950">
-      {/* Depth: a slightly lifted, warm charcoal from the top right. */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_85%_0%,rgb(46_42_36/0.85),transparent_70%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_10%_100%,rgb(200_165_90/0.06),transparent_70%)]" />
+    <div aria-hidden className="absolute inset-0 -z-10 overflow-hidden bg-navy-950">
+      {/* Depth: a slightly lighter navy from the top right. */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_85%_0%,rgb(18_50_92/0.9),transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_10%_100%,rgb(40_118_231/0.14),transparent_70%)]" />
 
       {/* Star lattice, strongest top right, gone behind the text (phones: corner only). */}
       <svg className="absolute inset-0 size-full [mask-image:radial-gradient(ellipse_70%_30%_at_100%_0%,black_10%,transparent_85%)] lg:[mask-image:radial-gradient(ellipse_75%_85%_at_85%_15%,black_5%,transparent_80%)]">
         <defs>
           <pattern id="hero-star-lattice" width="96" height="96" patternUnits="userSpaceOnUse">
-            <g fill="none" className="stroke-gold" strokeWidth="0.75" strokeOpacity="0.38">
+            <g fill="none" className="stroke-brand-soft" strokeWidth="0.75" strokeOpacity="0.38">
               {/* Square + diamond = eight-point star */}
               <path d="M24 24H72V72H24Z" />
               <path d="M48 14L82 48L48 82L14 48Z" />
@@ -28,7 +28,7 @@ export function HeroBackground() {
             <path
               d="M42 34H54L62 42V54L54 62H42L34 54V42Z"
               fill="none"
-              className="stroke-gold"
+              className="stroke-brand-soft"
               strokeWidth="0.5"
               strokeOpacity="0.2"
             />
@@ -46,14 +46,14 @@ export function HeroBackground() {
         fill="none"
       >
         <defs>
-          <linearGradient id="hero-gold-line" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0" style={{ stopColor: 'var(--color-gold)', stopOpacity: 0 }} />
-            <stop offset="0.45" style={{ stopColor: 'var(--color-gold-soft)', stopOpacity: 0.55 }} />
-            <stop offset="1" style={{ stopColor: 'var(--color-gold)', stopOpacity: 0 }} />
+          <linearGradient id="hero-line" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" style={{ stopColor: 'var(--color-brand-soft)', stopOpacity: 0 }} />
+            <stop offset="0.45" style={{ stopColor: 'var(--color-brand-pale)', stopOpacity: 0.55 }} />
+            <stop offset="1" style={{ stopColor: 'var(--color-brand-soft)', stopOpacity: 0 }} />
           </linearGradient>
         </defs>
         {/* non-scaling-stroke keeps them hairline at any hero size (not inherited, so per path). */}
-        <g stroke="url(#hero-gold-line)">
+        <g stroke="url(#hero-line)">
           <path
             d="M-80 690C320 520 640 610 980 380S1380 90 1540 40"
             strokeWidth="1"
@@ -73,8 +73,8 @@ export function HeroBackground() {
         </g>
       </svg>
 
-      {/* Hairline gold rule along the bottom edge. */}
-      <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(to_right,transparent,rgb(200_165_90/0.45),transparent)]" />
+      {/* Hairline light-blue rule along the bottom edge. */}
+      <div className="absolute inset-x-0 bottom-0 h-px bg-[linear-gradient(to_right,transparent,rgb(142_197_255/0.35),transparent)]" />
     </div>
   )
 }

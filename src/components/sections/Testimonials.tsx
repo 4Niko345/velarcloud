@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Quote, Star } from 'lucide-react'
 import type { TestimonialsBlock } from '@/payload/payload-types'
 import { container, SectionHeader, type SectionContext } from './shared'
+import { mediaSrc } from '@/lib/media'
 
 type Item = NonNullable<TestimonialsBlock['items']>[number]
 
@@ -21,7 +22,7 @@ function Stars({ rating, label }: { rating: number; label: string }) {
       {Array.from({ length: 5 }, (_, index) => (
         <Star
           key={index}
-          className={`size-4 ${index < value ? 'fill-gold text-gold' : 'text-gold/30'}`}
+          className={`size-4 ${index < value ? 'fill-amber-500 text-amber-500' : 'text-amber-500/30'}`}
           strokeWidth={1.5}
           aria-hidden
         />
@@ -35,18 +36,18 @@ function Avatar({ item }: { item: Item }) {
   if (photo?.url) {
     return (
       <Image
-        src={photo.url}
+        src={mediaSrc(photo.url)}
         alt=""
         width={44}
         height={44}
-        className="size-11 shrink-0 rounded-full object-cover ring-1 ring-gold/40"
+        className="size-11 shrink-0 rounded-full object-cover ring-1 ring-brand/40"
       />
     )
   }
   return (
     <span
       aria-hidden
-      className="flex size-11 shrink-0 items-center justify-center rounded-full bg-ink-950 font-display text-sm font-semibold text-gold ring-1 ring-gold/40"
+      className="flex size-11 shrink-0 items-center justify-center rounded-full bg-navy-950 font-display text-sm font-semibold text-brand-soft ring-1 ring-brand/40"
     >
       {initials(item.name)}
     </span>
@@ -62,14 +63,20 @@ export function Testimonials({ block, ctx }: { block: TestimonialsBlock; ctx: Se
   return (
     <section id={block.anchor || undefined} aria-labelledby={headingId} className="bg-surface py-20 sm:py-24">
       <div className={container}>
-        <SectionHeader id={headingId} eyebrow={block.eyebrow} heading={block.heading} text={block.text} />
+        <SectionHeader
+          id={headingId}
+          eyebrow={block.eyebrow}
+          heading={block.heading}
+          text={block.text}
+          as={ctx.headingLevel}
+        />
         <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
           {items.map((item) => (
             <li key={item.id ?? item.name}>
-              <figure className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm transition hover:border-gold/50 hover:shadow-md">
+              <figure className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm transition hover:border-brand/40 hover:shadow-md">
                 <div className="flex items-center justify-between gap-4">
                   {item.rating ? <Stars rating={item.rating} label={ctx.dict.rating} /> : <span />}
-                  <Quote className="size-7 text-gold/35" strokeWidth={1.5} aria-hidden />
+                  <Quote className="size-7 text-brand/30" strokeWidth={1.5} aria-hidden />
                 </div>
                 <blockquote className="mt-5 flex-1 font-display text-lg leading-relaxed text-foreground">
                   <p>

@@ -1,14 +1,15 @@
 import type { CollectionConfig } from 'payload'
-import { slugField } from 'payload'
 import { authenticated, authenticatedOrPublished } from '../access'
 import { pageBlocks } from '../blocks'
+import { localizedSlugField } from '../fields/slug'
 
 export const Pages: CollectionConfig = {
   slug: 'pages',
   admin: {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status', 'updatedAt'],
-    description: 'The page with slug "home" is the front page. Switch language from the top bar.',
+    description:
+      'The page with slug "home" is the front page; others are served at /<slug> (Finnish) and /en/<slug> (English). Each language has its own slug.',
   },
   access: {
     read: authenticatedOrPublished,
@@ -21,7 +22,7 @@ export const Pages: CollectionConfig = {
   },
   fields: [
     { name: 'title', type: 'text', required: true, localized: true },
-    slugField(),
+    localizedSlugField(),
     {
       name: 'description',
       type: 'textarea',

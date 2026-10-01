@@ -101,7 +101,7 @@ export function PlanPrice({ monthly, yearly, period, yearlyNote, dark }: PlanPri
       {yearly && yearlyNote && (
         <div className="mt-1 min-h-4">
           {showYearly && (
-            <p className={`text-xs motion-safe:animate-price-in ${dark ? 'text-gold' : 'text-gold-ink'}`}>
+            <p className={`text-xs motion-safe:animate-price-in ${dark ? 'text-brand-soft' : 'text-brand-ink'}`}>
               {yearlyNote}
             </p>
           )}
