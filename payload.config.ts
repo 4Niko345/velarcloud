@@ -1,5 +1,6 @@
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import sharp from 'sharp'
 import path from 'node:path'
@@ -50,6 +51,28 @@ export default buildConfig({
     // as a safety net next to entrypoint.sh's `npm run migrate`.
     prodMigrations: migrations,
   }),
+
+  // SMTP from env. Without SMTP_HOST (e.g. the Docker build, which gets no
+  // runtime env) Payload falls back to logging emails to the console.
+  // SMTP_PASS_HEX (hex-encoded password) wins over SMTP_PASS: the Hostinger
+  // password starts with "=", which env editors easily drop.
+  email: process.env.SMTP_HOST
+    ? nodemailerAdapter({
+        defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
+        defaultFromName: process.env.SMTP_FROM_NAME || 'VelarCloud',
+        transportOptions: {
+          host: process.env.SMTP_HOST,
+          port: Number(process.env.SMTP_PORT) || 587,
+          secure: process.env.SMTP_SECURE === 'true',
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS_HEX
+              ? Buffer.from(process.env.SMTP_PASS_HEX, 'hex').toString('utf8')
+              : process.env.SMTP_PASS,
+          },
+        },
+      })
+    : undefined,
 
   sharp,
 
