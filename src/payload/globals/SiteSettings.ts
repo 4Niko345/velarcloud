@@ -43,7 +43,7 @@ export const SiteSettings: GlobalConfig = {
               relationTo: 'media',
               admin: {
                 description:
-                  'Light (white), tightly cropped logo for the dark header and footer. Without one, the name is shown as text.',
+                  'Logo symbol (icon only, square, tightly cropped) for the dark header and footer. It is shown to the left of the name "VELAR CLOUD". Without one, a placeholder cloud symbol is shown.',
               },
             },
             {
