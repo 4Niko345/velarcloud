@@ -20,7 +20,8 @@ import {
 } from 'simple-icons'
 import { brandOptions, type BrandKey } from '@/payload/fields/brands'
 
-const marks: Record<BrandKey, SimpleIcon> = {
+/** Brand marks from simple-icons: the path and the brand's official colour (hex). */
+export const brandIcons: Record<BrandKey, SimpleIcon> = {
   google: siGoogle,
   googlecalendar: siGooglecalendar,
   googlemeet: siGooglemeet,
@@ -83,7 +84,7 @@ type BrandLogoProps = {
 
 /** Single-colour brand mark (inherits currentColor so it follows the theme). */
 export function BrandLogo({ brand, size = 20, className = '', decorative = false }: BrandLogoProps) {
-  const mark = marks[brand]
+  const mark = brandIcons[brand]
   const widthFactor = wordmarks[brand] ?? 1
   // Crop a wordmark's viewBox to its middle band so the letters fill the height.
   const viewBox = widthFactor > 1 ? `0 ${12 - 12 / widthFactor} 24 ${24 / widthFactor}` : '0 0 24 24'

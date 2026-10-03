@@ -35,6 +35,52 @@ export const mediaFiles = {
 export type MediaKey = keyof typeof mediaFiles
 export const media = (key: MediaKey) => ({ $media: key })
 
+/** Rich text, one paragraph per line. The seed turns it into the editor's format. */
+const richText = (text: Localized) => ({ $richText: text })
+
+const contactEmail = 'support@velarcloud.com'
+
+// Forms (Forms & email → Forms), matched by title. form('key') in a page becomes
+// the created form.
+export const forms = {
+  contact: {
+    title: 'Yhteydenottolomake',
+    fields: [
+      { blockType: 'text', name: 'name', label: t('Nimi', 'Name'), required: true, width: 50 },
+      { blockType: 'email', name: 'email', label: t('Sähköposti', 'Email'), required: true, width: 50 },
+      { blockType: 'text', name: 'phone', label: t('Puhelinnumero', 'Phone number'), required: false, width: 50 },
+      { blockType: 'text', name: 'company', label: t('Yritys', 'Company'), required: false, width: 50 },
+      { blockType: 'textarea', name: 'message', label: t('Viesti', 'Message'), required: true, width: 100 },
+    ],
+    submitButtonLabel: t('Lähetä viesti', 'Send message'),
+    confirmationType: 'message',
+    confirmationMessage: richText(
+      t(
+        'Kiitos viestistäsi! Palaamme asiaan mahdollisimman pian.',
+        'Thank you for your message! We will get back to you as soon as possible.',
+      ),
+    ),
+    sendThankYou: true,
+    // Notification to the team; "Reply to" lets them answer the visitor directly.
+    emails: [
+      {
+        emailTo: contactEmail,
+        replyTo: '{{email}}',
+        subject: t('Uusi yhteydenotto verkkosivuilta: {{name}}', 'New contact request from the website: {{name}}'),
+        message: richText(
+          t(
+            'Verkkosivujen yhteydenottolomakkeella lähetettiin uusi viesti. Vastaa suoraan tähän sähköpostiin, niin vastaus menee lähettäjälle.\n{{*:table}}',
+            'A new message was sent with the contact form on the website. Reply to this email to answer the sender directly.\n{{*:table}}',
+          ),
+        ),
+      },
+    ],
+  },
+}
+
+export type FormKey = keyof typeof forms
+const form = (key: FormKey) => ({ $form: key })
+
 // Sections used on more than one page.
 const pricingSection = {
   blockType: 'pricing',
@@ -415,7 +461,8 @@ export const contactPage = {
         trial(t('Kokeile maksutta 14 päivää', 'Start your free trial'), 'secondary'),
       ],
       showEmail: true,
-      // Paste the GoHighLevel form embed URL in the admin (Sites → Forms → Integrate).
+      // Fields and texts are edited in Forms → Yhteydenottolomake.
+      form: form('contact'),
       formTitle: t('Yhteydenottolomake', 'Contact form'),
       formHeight: 760,
       image: media('team'),
@@ -448,7 +495,7 @@ export const siteSettings = {
   // subdomain before this site takes over velarcloud.fi / .com, then update here.
   trialUrl: t('https://velarcloud.fi/valitse-palvelu-ratkaisu', 'https://velarcloud.com/choose-your-plan-page'),
   bookingUrl: t('https://velarcloud.fi/varaus-kalenteri', 'https://velarcloud.com/booking-calendar'),
-  contactEmail: 'support@velarcloud.com',
+  contactEmail,
   social: [
     { platform: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61571491043564' },
     { platform: 'Instagram', url: 'https://www.instagram.com/velarcloud/' },

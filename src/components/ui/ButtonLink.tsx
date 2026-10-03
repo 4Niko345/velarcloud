@@ -10,11 +10,17 @@ type ButtonLinkProps = {
   className?: string
 }
 
-const base =
-  'inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2'
+/**
+ * Hover for every call-to-action button: a small lift and a soft blue glow. The lift
+ * is skipped for reduced motion; hover only applies on devices that can hover.
+ */
+export const ctaHover =
+  'transition-all duration-300 ease-out hover:shadow-lg hover:shadow-brand/30 motion-safe:hover:-translate-y-0.5'
+
+const base = `inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 ${ctaHover}`
 
 const styles = {
-  // Gold with near-black text: 8:1 contrast.
+  // Blue with white text: 5.4:1 contrast.
   primary: 'bg-brand-ink text-white shadow-sm hover:bg-brand-deep',
   secondaryLight:
     'border border-foreground/15 bg-white text-foreground hover:border-brand-ink hover:text-brand-ink',

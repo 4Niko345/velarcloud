@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { ctaHover } from '@/components/ui/ButtonLink'
 
 // not-found.tsx gets no params, so the message is in both languages.
 export default function NotFound() {
@@ -16,14 +17,14 @@ export default function NotFound() {
         <Link
           href="/"
           lang="fi"
-          className="inline-flex min-h-11 items-center justify-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep"
+          className={`inline-flex min-h-11 items-center justify-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep ${ctaHover}`}
         >
           Etusivulle
         </Link>
         <Link
           href="/en"
           lang="en"
-          className="inline-flex min-h-11 items-center justify-center rounded-full border border-foreground/15 px-6 text-sm font-semibold hover:border-brand-ink hover:text-brand-ink"
+          className={`inline-flex min-h-11 items-center justify-center rounded-full border border-foreground/15 px-6 text-sm font-semibold hover:border-brand-ink hover:text-brand-ink ${ctaHover}`}
         >
           Go to the homepage
         </Link>

@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { ctaHover } from '@/components/ui/ButtonLink'
 import { NavLink } from './NavLink'
 
 type NavLink = { label: string; href: string }
@@ -52,7 +53,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
                 <NavLink
                   href={item.href}
                   onClick={close}
-                  className="block py-3.5 text-base font-medium text-white/90 hover:text-white aria-[current=page]:text-brand-soft"
+                  className="block py-3.5 text-base font-medium text-white/90 transition-colors duration-200 ease-in-out hover:text-brand-soft aria-[current=page]:text-brand-soft"
                 >
                   {item.label}
                 </NavLink>
@@ -60,7 +61,10 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
             ))}
             {login && (
               <li>
-                <a href={login.href} className="block py-3.5 text-base font-medium text-white/90 hover:text-white">
+                <a
+                  href={login.href}
+                  className="block py-3.5 text-base font-medium text-white/90 transition-colors duration-200 ease-in-out hover:text-brand-soft"
+                >
                   {login.label}
                 </a>
               </li>
@@ -71,7 +75,7 @@ export function MobileMenu({ items, login, cta, labels }: MobileMenuProps) {
           <a
             href={cta.href}
             onClick={close}
-            className="mt-4 flex min-h-11 items-center justify-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep sm:hidden"
+            className={`mt-4 flex min-h-11 items-center justify-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep sm:hidden ${ctaHover}`}
           >
             {cta.label}
           </a>

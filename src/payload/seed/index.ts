@@ -1,7 +1,7 @@
 /**
  * Fills an empty database with the site's pages (home, pricing, contact), their
- * photos and the site settings, in Finnish and English. Skips anything that
- * already exists unless run with "force".
+ * photos, the contact form and the site settings, in Finnish and English. Skips
+ * anything that already exists unless run with "force".
  *
  *   npm run seed
  *   npm run seed -- force   # overwrite the seeded pages and site settings
@@ -13,7 +13,7 @@ import { fileURLToPath } from 'node:url'
 import { getPayload, type RequiredDataFromCollectionSlug } from 'payload'
 import config from '../../../payload.config'
 import { defaultLocale, locales, type Locale } from '../../i18n/config'
-import { mediaFiles, pages, siteSettings, type Localized, type MediaKey } from './content'
+import { forms, mediaFiles, pages, siteSettings, type FormKey, type Localized, type MediaKey } from './content'
 
 type Data = Record<string, unknown>
 
@@ -26,9 +26,33 @@ const isLocalized = (value: unknown): value is Localized =>
   typeof (value as Localized).fi === 'string' &&
   typeof (value as Localized).en === 'string'
 
-/** Replaces every t(fi, en) pair with the string for `locale`. */
+/** Rich text in the editor's (Lexical) format: one paragraph per line. */
+const lexical = (text: string) => ({
+  root: {
+    type: 'root',
+    format: '',
+    indent: 0,
+    version: 1,
+    direction: 'ltr',
+    children: text.split('\n').map((line) => ({
+      type: 'paragraph',
+      format: '',
+      indent: 0,
+      version: 1,
+      direction: 'ltr',
+      textFormat: 0,
+      textStyle: '',
+      children: [{ type: 'text', text: line, format: 0, detail: 0, mode: 'normal', style: '', version: 1 }],
+    })),
+  },
+})
+
+/** Replaces every t(fi, en) pair with the string for `locale`, and richText() with editor content. */
 function pick(value: unknown, locale: Locale): unknown {
   if (isLocalized(value)) return value[locale]
+  if (value && typeof value === 'object' && '$richText' in value) {
+    return lexical((value as { $richText: Localized }).$richText[locale])
+  }
   if (Array.isArray(value)) return value.map((item) => pick(item, locale))
   if (value && typeof value === 'object') {
     return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, pick(item, locale)]))
@@ -36,12 +60,15 @@ function pick(value: unknown, locale: Locale): unknown {
   return value
 }
 
-/** Replaces every media('key') placeholder with the uploaded document's id. */
-function withMedia(value: unknown, ids: Record<MediaKey, number>): unknown {
-  if (Array.isArray(value)) return value.map((item) => withMedia(item, ids))
+type Refs = { media: Record<MediaKey, number>; forms: Record<FormKey, number> }
+
+/** Replaces every media('key') and form('key') placeholder with the created document's id. */
+function withRefs(value: unknown, refs: Refs): unknown {
+  if (Array.isArray(value)) return value.map((item) => withRefs(item, refs))
   if (value && typeof value === 'object') {
-    if ('$media' in value) return ids[(value as { $media: MediaKey }).$media]
-    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, withMedia(item, ids)]))
+    if ('$media' in value) return refs.media[(value as { $media: MediaKey }).$media]
+    if ('$form' in value) return refs.forms[(value as { $form: FormKey }).$form]
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, withRefs(item, refs)]))
   }
   return value
 }
@@ -90,9 +117,49 @@ for (const [key, { file, alt }] of Object.entries(mediaFiles) as [MediaKey, (typ
   payload.logger.info(`Uploaded ${file}.`)
 }
 
+// Forms, matched by title.
+const formIds = {} as Record<FormKey, number>
+for (const [key, form] of Object.entries(forms) as [FormKey, (typeof forms)[FormKey]][]) {
+  const existing = await payload.find({
+    collection: 'forms',
+    where: { title: { equals: form.title } },
+    limit: 1,
+    depth: 0,
+  })
+  if (existing.docs[0] && !force) {
+    formIds[key] = existing.docs[0].id
+    payload.logger.info(`Form "${form.title}" exists, skipping (run \`npm run seed -- force\` to overwrite).`)
+    continue
+  }
+
+  const data = pick(form, defaultLocale) as Data
+  let saved = existing.docs[0]
+    ? await payload.update({
+        collection: 'forms',
+        id: existing.docs[0].id,
+        locale: defaultLocale,
+        data: data as Partial<RequiredDataFromCollectionSlug<'forms'>>,
+      })
+    : await payload.create({
+        collection: 'forms',
+        locale: defaultLocale,
+        data: data as RequiredDataFromCollectionSlug<'forms'>,
+      })
+  for (const locale of otherLocales) {
+    saved = await payload.update({
+      collection: 'forms',
+      id: saved.id,
+      locale,
+      data: withIds(pick(form, locale), saved) as Partial<RequiredDataFromCollectionSlug<'forms'>>,
+    })
+  }
+  formIds[key] = saved.id
+  payload.logger.info(`Form "${form.title}" seeded (${locales.join(', ')}).`)
+}
+
 // Pages, matched by their Finnish slug.
 for (const page of pages) {
-  const content = withMedia(page, mediaIds)
+  const content = withRefs(page, { media: mediaIds, forms: formIds })
   const slug = pick(page.slug, defaultLocale) as string
   const existing = await payload.find({
     collection: 'pages',

@@ -6,6 +6,7 @@ import { getDictionary } from '@/i18n/dictionaries'
 import { pageMetadata } from '@/lib/metadata'
 import { getPageBySlug } from '@/lib/pages'
 import { PageView } from '@/components/PageView'
+import { ctaHover } from '@/components/ui/ButtonLink'
 
 // Content comes from Payload at request time — no database needed at build.
 export const dynamic = 'force-dynamic'
@@ -40,7 +41,7 @@ export default async function HomePage({ params }: Args) {
       <p className="mt-6 text-lg text-muted">{dict.placeholder}</p>
       <Link
         href="/admin"
-        className="mt-10 inline-flex min-h-11 items-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep"
+        className={`mt-10 inline-flex min-h-11 items-center rounded-full bg-brand-ink px-6 text-sm font-semibold text-white hover:bg-brand-deep ${ctaHover}`}
       >
         {dict.openAdmin}
       </Link>

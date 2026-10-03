@@ -3,18 +3,23 @@ import { Mail } from 'lucide-react'
 import { resolveLink } from '@/lib/links'
 import type { ContactBlock } from '@/payload/payload-types'
 import { ButtonLink } from '@/components/ui/ButtonLink'
+import { FormRenderer } from '@/components/forms/FormRenderer'
+import { toClientForm } from '@/components/forms/clientForm'
+import { RichTextContent } from '@/components/RichTextContent'
 import { container, SectionHeader, type SectionContext } from './shared'
 import { mediaSrc } from '@/lib/media'
 
 /**
- * Text, buttons and email on the left; the embedded GoHighLevel form on the
- * right. Until a form URL is set in the admin, the image takes the form's place.
+ * Text, buttons and email on the left; on the right a form from the admin
+ * (Forms), or else an embedded GoHighLevel form. Without either, the image.
  */
 export function Contact({ block, ctx }: { block: ContactBlock; ctx: SectionContext }) {
   const headingId = `${block.id}-heading`
   const image = typeof block.image === 'object' ? block.image : null
   const email = block.showEmail ? ctx.settings.contactEmail : null
-  const formUrl = block.formUrl
+  const form = typeof block.form === 'object' ? block.form : null
+  const formUrl = form ? null : block.formUrl
+  const formTitle = block.formTitle || block.heading
 
   const photo = image?.url ? (
     <Image
@@ -67,14 +72,31 @@ export function Contact({ block, ctx }: { block: ContactBlock; ctx: SectionConte
             </p>
           )}
 
-          {formUrl && photo && <div className="mt-10 hidden lg:block">{photo}</div>}
+          {(form || formUrl) && photo && <div className="mt-10 hidden lg:block">{photo}</div>}
         </div>
 
-        {formUrl ? (
+        {form ? (
+          <div className="rounded-2xl border border-border bg-white p-5 shadow-sm sm:p-8">
+            <FormRenderer
+              form={toClientForm(form)}
+              locale={ctx.locale}
+              labels={ctx.dict.form}
+              title={formTitle}
+              messages={Object.fromEntries(
+                (form.fields ?? []).flatMap((field) =>
+                  field.blockType === 'message' && field.message && field.id
+                    ? [[field.id, <RichTextContent key={field.id} data={field.message} />]]
+                    : [],
+                ),
+              )}
+              confirmation={form.confirmationMessage ? <RichTextContent data={form.confirmationMessage} /> : null}
+            />
+          </div>
+        ) : formUrl ? (
           <div className="overflow-hidden rounded-2xl border border-border bg-white p-2 shadow-sm sm:p-4">
             <iframe
               src={formUrl}
-              title={block.formTitle || block.heading}
+              title={formTitle}
               loading="lazy"
               className="w-full border-0"
               style={{ height: block.formHeight ?? 760 }}

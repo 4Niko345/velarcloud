@@ -39,7 +39,7 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
                 <li key={item.href}>
                   <NavLink
                     href={item.href}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-brand-soft aria-[current=page]:bg-white/10 aria-[current=page]:text-white"
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors duration-200 ease-in-out hover:text-brand-soft focus-visible:outline-2 focus-visible:outline-brand-soft aria-[current=page]:bg-white/10 aria-[current=page]:text-white"
                   >
                     {item.label}
                   </NavLink>
@@ -54,7 +54,7 @@ export function SiteHeader({ locale, settings, dict }: SiteHeaderProps) {
           {login && (
             <a
               href={login.href}
-              className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/80 hover:text-white focus-visible:outline-2 focus-visible:outline-brand-soft lg:block"
+              className="hidden rounded-full px-3 py-2 text-sm font-medium text-white/80 transition-colors duration-200 ease-in-out hover:text-brand-soft focus-visible:outline-2 focus-visible:outline-brand-soft lg:block"
             >
               {login.label}
             </a>

@@ -25,15 +25,19 @@
   --color-brand-soft: #8ec5ff; /* light blue text, icons and lines on navy */
   --color-brand-pale: #d6e8ff; /* lightest accent on navy */
 
-  /* Logo row: the track holds the list twice, so -50% loops seamlessly. */
-  --animate-marquee: marquee 45s linear infinite;
+  /*
+   * Logo row (LogoCloud): two identical copies side by side; moving left by exactly
+   * one copy (-50%) and starting over loops without a seam. LogoCloud overrides the
+   * duration from the number of logos so the speed stays the same.
+   */
+  --animate-marquee: marquee 60s linear infinite;
 
   @keyframes marquee {
     from {
-      transform: translateX(0);
+      transform: translate3d(0, 0, 0);
     }
     to {
-      transform: translateX(-50%);
+      transform: translate3d(-50%, 0, 0);
     }
   }
 

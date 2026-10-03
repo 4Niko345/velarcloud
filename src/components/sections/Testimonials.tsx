@@ -73,7 +73,7 @@ export function Testimonials({ block, ctx }: { block: TestimonialsBlock; ctx: Se
         <ul className="mt-12 grid gap-6 md:grid-cols-2 lg:mt-14 lg:grid-cols-3">
           {items.map((item) => (
             <li key={item.id ?? item.name}>
-              <figure className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm transition hover:border-brand/40 hover:shadow-md">
+              <figure className="flex h-full flex-col rounded-2xl border border-border bg-white p-7 shadow-sm">
                 <div className="flex items-center justify-between gap-4">
                   {item.rating ? <Stars rating={item.rating} label={ctx.dict.rating} /> : <span />}
                   <Quote className="size-7 text-brand/30" strokeWidth={1.5} aria-hidden />

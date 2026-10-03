@@ -10,7 +10,9 @@ import { Users } from './src/payload/collections/Users'
 import { Media } from './src/payload/collections/Media'
 import { Pages } from './src/payload/collections/Pages'
 import { Posts } from './src/payload/collections/Posts'
+import { EmailTemplates } from './src/payload/globals/EmailTemplates'
 import { SiteSettings } from './src/payload/globals/SiteSettings'
+import { formsPlugin } from './src/payload/forms'
 import { migrations } from './src/payload/migrations'
 import { defaultLocale, localeNames, locales } from './src/i18n/config'
 
@@ -30,7 +32,10 @@ export default buildConfig({
   },
 
   collections: [Pages, Posts, Media, Users],
-  globals: [SiteSettings],
+  globals: [SiteSettings, EmailTemplates],
+
+  // Adds the Forms and Form submissions collections (src/payload/forms.ts).
+  plugins: [formsPlugin],
 
   // Content languages. Untranslated fields fall back to Finnish.
   localization: {
